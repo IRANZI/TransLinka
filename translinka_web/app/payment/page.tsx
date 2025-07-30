@@ -31,17 +31,27 @@ export default function PaymentPage() {
   const serviceFee = 300;
 
   const handlePayment = () => {
-    
+    // Simulate payment processing
     console.log('Processing payment...', { bookingDetails, paymentMethod, cardDetails });
- 
-    router.push('/dashboard?payment=success');
+    
+    // Redirect to booking confirmation page with booking details
+    const params = new URLSearchParams({
+      from: bookingDetails.from,
+      to: bookingDetails.to,
+      date: bookingDetails.date,
+      passengers: bookingDetails.passengers.toString(),
+      seats: bookingDetails.selectedSeats.join(','),
+      total: bookingDetails.totalPrice.toString()
+    });
+    
+    router.push(`/booking-confirmation?${params.toString()}`);
   };
 
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-full mx-auto px-6 sm:px-8 lg:px-12">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <div className="flex items-center">
@@ -86,7 +96,7 @@ export default function PaymentPage() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-full mx-auto px-6 sm:px-8 lg:px-12 py-8">
         <div className="bg-white">
           {/* Header */}
           <div className="mb-6">

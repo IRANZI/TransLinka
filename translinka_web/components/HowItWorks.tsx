@@ -24,12 +24,12 @@ const steps = [
 export default function HowItWorks() {
   return (
     <section className="bg-white py-16 px-6 font-sans">
-      <div className="max-w-7xl mx-auto text-center">
+      <div className="max-w-full mx-auto text-center px-6 sm:px-8 lg:px-12">
         {/* Header Section */}
-        <h2 className="text-4xl md:text-5xl font-heading font-bold text-gray-800 mb-6">
+        <h2 className="text-4xl md:text-5xl font-heading font-bold text-gray-900 mb-6">
           How It Works
         </h2>
-        <p className="text-gray-600 mb-16 text-lg max-w-3xl mx-auto leading-relaxed">
+        <p className="text-gray-600 mb-16 text-xl max-w-3xl mx-auto leading-relaxed font-sans">
           Getting Started with TransLinka is simple and intuitive
         </p>
 
@@ -42,14 +42,13 @@ export default function HowItWorks() {
   <span className="text-white font-bold text-4xl">{step.number}</span>
 </div>
 
-{/* Title */}
-<h3 className="text-2xl font-heading font-bold text-gray-800 mb-4">
-  {step.title}
-</h3>
+              {/* Title */}
+              <h3 className="font-heading font-bold text-gray-900 mb-4 text-xl md:text-2xl">
+                {step.title}
+              </h3>
 
-              
               {/* Description */}
-              <p className="text-gray-600 text-base leading-relaxed max-w-sm">
+              <p className="text-gray-600 text-lg leading-relaxed max-w-sm font-sans">
                 {step.description}
               </p>
             </div>

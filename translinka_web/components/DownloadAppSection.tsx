@@ -1,9 +1,48 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import QRCode from 'qrcode';
 
 export default function DownloadAppSection() {
+  const [iosQrCode, setIosQrCode] = useState<string>('');
+  const [androidQrCode, setAndroidQrCode] = useState<string>('');
+
+  useEffect(() => {
+    // Generate QR codes for app store links
+    const generateQRCodes = async () => {
+      try {
+        // iOS App Store link (example URL - replace with actual when available)
+        const iosAppStoreUrl = 'https://apps.apple.com/app/translinka';
+        const iosQrCodeDataUrl = await QRCode.toDataURL(iosAppStoreUrl, {
+          width: 160,
+          margin: 1,
+          color: {
+            dark: '#000000',
+            light: '#FFFFFF'
+          }
+        });
+        setIosQrCode(iosQrCodeDataUrl);
+
+        // Google Play Store link (example URL - replace with actual when available)
+        const androidPlayStoreUrl = 'https://play.google.com/store/apps/details?id=com.translinka';
+        const androidQrCodeDataUrl = await QRCode.toDataURL(androidPlayStoreUrl, {
+          width: 160,
+          margin: 1,
+          color: {
+            dark: '#000000',
+            light: '#FFFFFF'
+          }
+        });
+        setAndroidQrCode(androidQrCodeDataUrl);
+      } catch (error) {
+        console.error('Error generating QR codes:', error);
+      }
+    };
+
+    generateQRCodes();
+  }, []);
+
   return (
     <section className="bg-blue-50 py-16 px-6 font-sans">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-full mx-auto px-6 sm:px-8 lg:px-12">
         {/* Top Section */}
         <div className="w-full flex flex-col items-center text-center mb-16">
           {/* Small Button */}
@@ -14,12 +53,12 @@ export default function DownloadAppSection() {
           </div>
           
           {/* Main Heading */}
-          <h2 className="font-heading font-bold text-gray-800 mb-6 text-4xl lg:text-5xl">
+          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-heading font-bold text-gray-900 mb-6">
             Get TransLinka on Your Phone
           </h2>
           
           {/* Description */}
-          <p className="text-gray-600 mb-8 max-w-2xl text-lg">
+          <p className="text-gray-600 mb-8 max-w-2xl text-xl font-sans">
             Download our mobile app for the complete TransLinka experience. Available for iOS and Android devices.
           </p>
         </div>
@@ -28,10 +67,10 @@ export default function DownloadAppSection() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-20">
           {/* iOS Column */}
           <div className="flex flex-col">
-            <h3 className="font-heading font-bold text-gray-800 mb-4 text-2xl">
+            <h3 className="text-2xl font-heading font-bold text-gray-900 mb-4">
               Download for iOS
             </h3>
-            <p className="text-gray-600 mb-6 text-base leading-relaxed">
+            <p className="text-gray-600 mb-6 text-lg leading-relaxed font-sans">
               Get the full TransLinka experience on your iPhone or iPad with seamless iOS integration.
             </p>
             
@@ -73,10 +112,10 @@ export default function DownloadAppSection() {
 
           {/* Android Column */}
           <div className="flex flex-col">
-            <h3 className="font-heading font-bold text-gray-800 mb-4 text-2xl">
+            <h3 className="text-2xl font-heading font-bold text-gray-900 mb-4">
               Download for Android
             </h3>
-            <p className="text-gray-600 mb-6 text-base leading-relaxed">
+            <p className="text-gray-600 mb-6 text-lg leading-relaxed font-sans">
               Experience TransLinka on Android with advanced AR features and Google integration.
             </p>
             
@@ -120,130 +159,58 @@ export default function DownloadAppSection() {
         {/* QR Code Download Section */}
         <div className="mb-16">
           <div className="bg-white rounded-2xl shadow-lg px-8 py-12 w-full border border-blue-200">
-            <h3 className="font-heading font-bold text-2xl text-gray-800 mb-4 text-center">
+            <h3 className="text-2xl font-heading font-bold text-gray-900 mb-4 text-center">
               Scan to Download
             </h3>
-            <p className="text-gray-600 mb-12 text-center text-base max-w-3xl mx-auto">
+            <p className="text-gray-600 mb-12 text-center text-lg max-w-3xl mx-auto font-sans">
               Point your phone camera at the QR code to quickly download the app
             </p>
             
             <div className="flex flex-col md:flex-row justify-center gap-20 w-full max-w-lg mx-auto">
-              {/* iOS QR Code */}
-              <div className="flex-1 flex flex-col items-center">
-                <div className="w-36 h-36 border-2 border-gray-300 rounded-lg p-3 mb-4 bg-white">
-                  <svg className="w-full h-full" viewBox="0 0 100 100" fill="currentColor">
-                    <rect x="10" y="10" width="80" height="80" fill="white" stroke="black" strokeWidth="1"/>
-                    {/* Corner squares */}
-                    <rect x="15" y="15" width="20" height="20" fill="black"/>
-                    <rect x="65" y="15" width="20" height="20" fill="black"/>
-                    <rect x="15" y="65" width="20" height="20" fill="black"/>
-                    {/* Inner corner squares */}
-                    <rect x="20" y="20" width="10" height="10" fill="white"/>
-                    <rect x="70" y="20" width="10" height="10" fill="white"/>
-                    <rect x="20" y="70" width="10" height="10" fill="white"/>
-                    {/* Center square */}
-                    <rect x="35" y="35" width="30" height="30" fill="black"/>
-                    <rect x="40" y="40" width="20" height="20" fill="white"/>
-                    <rect x="45" y="45" width="10" height="10" fill="black"/>
-                    {/* Random QR code pattern */}
-                    <rect x="15" y="40" width="5" height="5" fill="black"/>
-                    <rect x="25" y="40" width="5" height="5" fill="black"/>
-                    <rect x="35" y="40" width="5" height="5" fill="black"/>
-                    <rect x="50" y="40" width="5" height="5" fill="black"/>
-                    <rect x="60" y="40" width="5" height="5" fill="black"/>
-                    <rect x="70" y="40" width="5" height="5" fill="black"/>
-                    <rect x="80" y="40" width="5" height="5" fill="black"/>
-                    <rect x="15" y="50" width="5" height="5" fill="black"/>
-                    <rect x="25" y="50" width="5" height="5" fill="black"/>
-                    <rect x="35" y="50" width="5" height="5" fill="black"/>
-                    <rect x="50" y="50" width="5" height="5" fill="black"/>
-                    <rect x="60" y="50" width="5" height="5" fill="black"/>
-                    <rect x="70" y="50" width="5" height="5" fill="black"/>
-                    <rect x="80" y="50" width="5" height="5" fill="black"/>
-                    <rect x="15" y="60" width="5" height="5" fill="black"/>
-                    <rect x="25" y="60" width="5" height="5" fill="black"/>
-                    <rect x="35" y="60" width="5" height="5" fill="black"/>
-                    <rect x="50" y="60" width="5" height="5" fill="black"/>
-                    <rect x="60" y="60" width="5" height="5" fill="black"/>
-                    <rect x="70" y="60" width="5" height="5" fill="black"/>
-                    <rect x="80" y="60" width="5" height="5" fill="black"/>
-                    <rect x="15" y="70" width="5" height="5" fill="black"/>
-                    <rect x="25" y="70" width="5" height="5" fill="black"/>
-                    <rect x="35" y="70" width="5" height="5" fill="black"/>
-                    <rect x="50" y="70" width="5" height="5" fill="black"/>
-                    <rect x="60" y="70" width="5" height="5" fill="black"/>
-                    <rect x="70" y="70" width="5" height="5" fill="black"/>
-                    <rect x="80" y="70" width="5" height="5" fill="black"/>
-                    <rect x="15" y="80" width="5" height="5" fill="black"/>
-                    <rect x="25" y="80" width="5" height="5" fill="black"/>
-                    <rect x="35" y="80" width="5" height="5" fill="black"/>
-                    <rect x="50" y="80" width="5" height="5" fill="black"/>
-                    <rect x="60" y="80" width="5" height="5" fill="black"/>
-                    <rect x="70" y="80" width="5" height="5" fill="black"/>
-                    <rect x="80" y="80" width="5" height="5" fill="black"/>
-                  </svg>
+              {/* QR Code for iOS */}
+              <div className="flex flex-col items-center bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <div className="mb-4">
+                  {iosQrCode ? (
+                    <div className="w-32 h-32 bg-white rounded-lg p-2 border border-gray-200">
+                      <img 
+                        src={iosQrCode} 
+                        alt="iOS App Store QR Code" 
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-32 h-32 bg-gray-100 rounded-lg flex items-center justify-center">
+                      <span className="text-gray-500 text-xs">Loading...</span>
+                    </div>
+                  )}
                 </div>
-                <div className="font-bold text-gray-800 text-base">iOS App</div>
-                <div className="text-gray-500 text-sm">iPhone & iPad</div>
+                <div className="text-center">
+                  <div className="font-bold text-gray-800 text-base">iOS App</div>
+                  <div className="text-gray-500 text-sm">App Store</div>
+                </div>
               </div>
               
               {/* Android QR Code */}
-              <div className="flex-1 flex flex-col items-center">
-                <div className="w-36 h-36 border-2 border-gray-300 rounded-lg p-3 mb-4 bg-white">
-                  <svg className="w-full h-full" viewBox="0 0 100 100" fill="currentColor">
-                    <rect x="10" y="10" width="80" height="80" fill="white" stroke="black" strokeWidth="1"/>
-                    {/* Corner squares */}
-                    <rect x="15" y="15" width="20" height="20" fill="black"/>
-                    <rect x="65" y="15" width="20" height="20" fill="black"/>
-                    <rect x="15" y="65" width="20" height="20" fill="black"/>
-                    {/* Inner corner squares */}
-                    <rect x="20" y="20" width="10" height="10" fill="white"/>
-                    <rect x="70" y="20" width="10" height="10" fill="white"/>
-                    <rect x="20" y="70" width="10" height="10" fill="white"/>
-                    {/* Center square */}
-                    <rect x="35" y="35" width="30" height="30" fill="black"/>
-                    <rect x="40" y="40" width="20" height="20" fill="white"/>
-                    <rect x="45" y="45" width="10" height="10" fill="black"/>
-                    {/* Different QR code pattern */}
-                    <rect x="15" y="40" width="5" height="5" fill="black"/>
-                    <rect x="25" y="40" width="5" height="5" fill="black"/>
-                    <rect x="35" y="40" width="5" height="5" fill="black"/>
-                    <rect x="50" y="40" width="5" height="5" fill="black"/>
-                    <rect x="60" y="40" width="5" height="5" fill="black"/>
-                    <rect x="70" y="40" width="5" height="5" fill="black"/>
-                    <rect x="80" y="40" width="5" height="5" fill="black"/>
-                    <rect x="15" y="50" width="5" height="5" fill="black"/>
-                    <rect x="25" y="50" width="5" height="5" fill="black"/>
-                    <rect x="35" y="50" width="5" height="5" fill="black"/>
-                    <rect x="50" y="50" width="5" height="5" fill="black"/>
-                    <rect x="60" y="50" width="5" height="5" fill="black"/>
-                    <rect x="70" y="50" width="5" height="5" fill="black"/>
-                    <rect x="80" y="50" width="5" height="5" fill="black"/>
-                    <rect x="15" y="60" width="5" height="5" fill="black"/>
-                    <rect x="25" y="60" width="5" height="5" fill="black"/>
-                    <rect x="35" y="60" width="5" height="5" fill="black"/>
-                    <rect x="50" y="60" width="5" height="5" fill="black"/>
-                    <rect x="60" y="60" width="5" height="5" fill="black"/>
-                    <rect x="70" y="60" width="5" height="5" fill="black"/>
-                    <rect x="80" y="60" width="5" height="5" fill="black"/>
-                    <rect x="15" y="70" width="5" height="5" fill="black"/>
-                    <rect x="25" y="70" width="5" height="5" fill="black"/>
-                    <rect x="35" y="70" width="5" height="5" fill="black"/>
-                    <rect x="50" y="70" width="5" height="5" fill="black"/>
-                    <rect x="60" y="70" width="5" height="5" fill="black"/>
-                    <rect x="70" y="70" width="5" height="5" fill="black"/>
-                    <rect x="80" y="70" width="5" height="5" fill="black"/>
-                    <rect x="15" y="80" width="5" height="5" fill="black"/>
-                    <rect x="25" y="80" width="5" height="5" fill="black"/>
-                    <rect x="35" y="80" width="5" height="5" fill="black"/>
-                    <rect x="50" y="80" width="5" height="5" fill="black"/>
-                    <rect x="60" y="80" width="5" height="5" fill="black"/>
-                    <rect x="70" y="80" width="5" height="5" fill="black"/>
-                    <rect x="80" y="80" width="5" height="5" fill="black"/>
-                  </svg>
+              <div className="flex flex-col items-center bg-white p-6 rounded-lg shadow-sm border border-gray-200">
+                <div className="mb-4">
+                  {androidQrCode ? (
+                    <div className="w-32 h-32 bg-white rounded-lg p-2 border border-gray-200">
+                      <img 
+                        src={androidQrCode} 
+                        alt="Android Google Play QR Code" 
+                        className="w-full h-full object-contain"
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-32 h-32 bg-gray-100 rounded-lg flex items-center justify-center">
+                      <span className="text-gray-500 text-xs">Loading...</span>
+                    </div>
+                  )}
                 </div>
-                <div className="font-bold text-gray-800 text-base">Android App</div>
-                <div className="text-gray-500 text-sm">Google Play</div>
+                <div className="text-center">
+                  <div className="font-bold text-gray-800 text-base">Android App</div>
+                  <div className="text-gray-500 text-sm">Google Play</div>
+                </div>
               </div>
             </div>
           </div>

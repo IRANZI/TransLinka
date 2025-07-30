@@ -46,7 +46,7 @@ export default function MyTicketsPage() {
     <div className="min-h-screen bg-gray-50 font-sans">
       {/* Header */}
       <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-full mx-auto px-6 sm:px-8 lg:px-12">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="flex items-center">
@@ -92,7 +92,7 @@ export default function MyTicketsPage() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-full mx-auto px-6 sm:px-8 lg:px-12 py-8">
         {/* Stats Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
           <div className="bg-blue-500 rounded-xl p-6 text-white">

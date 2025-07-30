@@ -6,11 +6,11 @@ export default function FooterAndCTA() {
     <div className="font-sans">
       {/* CTA Section */}
       <section className="bg-gradient-to-r from-blue-500 to-blue-600 text-white py-12 md:py-20 px-4 sm:px-6 text-center">
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4 md:mb-6">
+        <div className="max-w-full mx-auto px-6 sm:px-8 lg:px-12">
+          <h2 className="text-4xl sm:text-5xl md:text-6xl font-bold mb-4 md:mb-6">
             Ready to Transform Your Commute?
           </h2>
-          <p className="text-base sm:text-lg md:text-xl mb-8 md:mb-10 leading-relaxed max-w-3xl mx-auto">
+          <p className="text-lg sm:text-xl md:text-2xl mb-8 md:mb-10 leading-relaxed max-w-3xl mx-auto font-sans">
             Join millions of smart travelers who choose TransLinka for their daily journey. Start your
             free account today.
           </p>
@@ -33,7 +33,7 @@ export default function FooterAndCTA() {
 
       {/* Footer Section */}
       <footer className="bg-slate-900 text-white pt-12 md:pt-16 pb-6 md:pb-8 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-sm md:text-base">
+        <div className="max-w-full mx-auto px-6 sm:px-8 lg:px-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 md:gap-8 text-sm md:text-base">
          
           <div className="sm:col-span-2 md:col-span-1">
             <div className="flex items-center mb-4 md:mb-6 space-x-3">
@@ -87,6 +87,7 @@ export default function FooterAndCTA() {
         <hr className="border-slate-600 my-8" />
 
         <div className="text-center text-gray-400 text-sm">
+         
           © 2025 <span className="font-semibold text-white">TransLinka</span>. All rights reserved.
           Built with <Heart className="inline w-4 h-4 text-red-500 mx-1" /> for better transportation.
         </div>

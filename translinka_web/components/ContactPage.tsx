@@ -14,13 +14,13 @@ import {
 export default function ContactPage() {
   return (
     <section className="bg-white py-12 md:py-16 px-4 sm:px-6 font-sans">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-full mx-auto px-6 sm:px-8 lg:px-12">
         {/* Header Section */}
         <div className="text-center mb-12 md:mb-20">
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-gray-800 mb-6 md:mb-8">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 md:mb-8 font-heading">
             Get in Touch
           </h2>
-          <p className="text-gray-600 text-base md:text-lg max-w-3xl mx-auto leading-relaxed px-4">
+          <p className="text-gray-600 text-xl max-w-3xl mx-auto leading-relaxed px-4 font-sans">
             Have questions about TransLinka? We're here to help. Reach out to our team and we'll get back to you as soon as possible.
           </p>
         </div>
@@ -30,7 +30,7 @@ export default function ContactPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2">
             {/* Left Column - Contact Form */}
             <div className="p-4 sm:p-6 md:p-10 lg:p-16">
-              <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-6 md:mb-10">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6 md:mb-10 font-heading">
                 Send us a Message
               </h3>
 
@@ -120,7 +120,7 @@ export default function ContactPage() {
 
             {/* Right Column - Contact Information */}
             <div className="p-4 sm:p-6 md:p-10 lg:p-16 bg-gray-50 border-t lg:border-t-0 lg:border-l border-gray-200">
-              <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-6 md:mb-10">
+              <h3 className="text-2xl font-bold text-gray-900 mb-6 md:mb-10 font-heading">
                 Contact Information
               </h3>
 
@@ -132,10 +132,10 @@ export default function ContactPage() {
                     <MapPin className="w-8 h-8 text-blue-600" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-800 mb-3 text-lg">
+                    <h4 className="font-bold text-gray-900 mb-3 text-lg font-sans">
                       Headquarters
                     </h4>
-                    <p className="text-gray-600 text-base">Kigali, Rwanda</p>
+                    <p className="text-gray-600 text-base font-sans">Kigali, Rwanda</p>
                   </div>
                 </div>
 
@@ -145,8 +145,8 @@ export default function ContactPage() {
                     <Mail className="w-8 h-8 text-green-600" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-800 mb-3 text-lg">Email</h4>
-                    <p className="text-gray-600 text-base">lamshemaleandre@gmail.com</p>
+                    <h4 className="font-bold text-gray-900 mb-3 text-lg font-sans">Email</h4>
+                    <p className="text-gray-600 text-base font-sans">lamshemaleandre@gmail.com</p>
                   </div>
                 </div>
 
@@ -156,15 +156,15 @@ export default function ContactPage() {
                     <Phone className="w-8 h-8 text-blue-600" />
                   </div>
                   <div>
-                    <h4 className="font-bold text-gray-800 mb-3 text-lg">Phone</h4>
-                    <p className="text-gray-600 text-base">+250-722-500-692</p>
+                    <h4 className="font-bold text-gray-900 mb-3 text-lg font-sans">Phone</h4>
+                    <p className="text-gray-600 text-base font-sans">+250-722-500-692</p>
                   </div>
                 </div>
               </div>
 
               {/* Follow Us Section */}
               <div>
-                <h4 className="text-xl font-bold text-gray-800 mb-10">
+                <h4 className="text-xl font-bold text-gray-900 mb-10 font-heading">
                   Follow Us
                 </h4>
                 <div className="flex space-x-8">

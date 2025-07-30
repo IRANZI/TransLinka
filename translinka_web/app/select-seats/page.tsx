@@ -63,7 +63,7 @@ export default function SelectSeatsPage() {
     <div className="min-h-screen bg-gray-50 font-sans">
       {/* Header */}
       <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-full mx-auto px-6 sm:px-8 lg:px-12">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
               <img src="/logo.png" alt="TransLinka Logo" className="h-8 w-8 object-contain mr-3" />
@@ -92,7 +92,7 @@ export default function SelectSeatsPage() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-full mx-auto px-6 sm:px-8 lg:px-12 py-8">
         <div className="mb-8">
           <h1 className="text-2xl font-heading font-bold text-gray-900 mb-2">Select Seats</h1>
           <p className="text-gray-600 font-sans">City Express</p>

@@ -89,7 +89,7 @@ export default function DashboardPage() {
       title: 'AI Chatbot',
       subtitle: 'Instant help',
       color: 'bg-orange-500',
-      href: '/chatbot'
+      href: '/chat-support'
     }
   ];
 
@@ -123,7 +123,7 @@ export default function DashboardPage() {
     <div className="min-h-screen bg-gray-50 font-sans">
       {/* Header */}
       <header className="bg-white shadow-sm border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-full mx-auto px-6 sm:px-8 lg:px-12">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="flex items-center">
@@ -171,27 +171,27 @@ export default function DashboardPage() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-full mx-auto px-6 sm:px-8 lg:px-12 py-8">
         {/* Welcome Section */}
         <div className="mb-8">
-          <h1 className="text-3xl font-heading font-bold text-gray-900 mb-2">
-            Welcome back, {user.name}!
+          <h1 className="text-4xl font-heading font-bold text-gray-900 mb-2">
+            Welcome back, {user.name}! 👋
           </h1>
-          <p className="text-gray-600 font-sans">Ready for your next Journey?</p>
+          <p className="text-xl text-gray-600 font-sans">Ready for your next Journey?</p>
         </div>
 
         {/* Stats Card */}
         <div className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl p-6 mb-8 text-white">
           <div className="flex justify-between items-start">
             <div>
-              <h2 className="text-lg font-heading font-medium mb-2">This Month</h2>
+              <h2 className="text-2xl font-heading font-medium mb-2">This Month</h2>
               <div className="flex items-baseline space-x-2">
-                <span className="text-3xl font-heading font-bold">{ticketStats.thisMonth}</span>
+                <span className="text-4xl font-bold font-heading">{ticketStats.thisMonth}</span>
                 <span className="text-lg font-sans">Tickets</span>
               </div>
               <div className="flex items-center mt-2 text-blue-100">
                 <TrendingUp className="w-4 h-4 mr-1" />
-                <span className="text-sm font-sans">+{ticketStats.changeFromLastMonth} from last month</span>
+                <span className="text-base text-green-100 font-sans">+{ticketStats.changeFromLastMonth} from last month</span>
               </div>
             </div>
             <button className="p-2 hover:bg-blue-400 rounded-lg transition-colors">
@@ -203,7 +203,7 @@ export default function DashboardPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Quick Actions */}
           <div className="lg:col-span-2">
-            <h2 className="text-xl font-heading font-semibold text-gray-900 mb-6">Quick Actions</h2>
+            <h2 className="text-2xl font-heading font-semibold text-gray-900 mb-6">Quick Actions</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {quickActions.map((action, index) => (
                 <Link
@@ -216,8 +216,8 @@ export default function DashboardPage() {
                       <action.icon className="w-6 h-6 text-white" />
                     </div>
                     <div>
-                      <h3 className="font-heading font-semibold text-gray-900 mb-1">{action.title}</h3>
-                      <p className="text-sm text-gray-600 font-sans">{action.subtitle}</p>
+                      <h3 className="font-medium text-lg text-gray-900 font-sans">{action.title}</h3>
+                      <p className="text-base text-gray-600 font-sans">{action.subtitle}</p>
                     </div>
                   </div>
                 </Link>

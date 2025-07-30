@@ -115,7 +115,7 @@ export default function SignupPage() {
 
       {/* Right Side - Form */}
       <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
-        <div className="w-full max-w-xl">
+        <div className="w-full max-w-2xl">
           <div className="bg-white rounded-3xl shadow-2xl p-14">
             <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-2 font-heading">Create Account</h2>
             <p className="text-gray-500 mb-8 text-sm md:text-base">Join TransLinka for smarter travel</p>

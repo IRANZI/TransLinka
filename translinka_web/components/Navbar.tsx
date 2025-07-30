@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 
@@ -7,21 +7,66 @@ export default function Navbar() {
   const [activeLink, setActiveLink] = useState('home');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // Scroll spy functionality
+  useEffect(() => {
+    const sections = [
+      { id: 'hero', name: 'home' },
+      { id: 'download', name: 'download' },
+      { id: 'features', name: 'features' },
+      { id: 'how-it-works', name: 'how-it-works' },
+      { id: 'contact', name: 'contact' }
+    ];
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const sectionName = sections.find(section => section.id === entry.target.id)?.name;
+            if (sectionName) {
+              setActiveLink(sectionName);
+            }
+          }
+        });
+      },
+      {
+        threshold: 0.3, // Trigger when 30% of the section is visible
+        rootMargin: '-80px 0px -80px 0px' // Account for navbar height
+      }
+    );
+
+    // Observe all sections
+    sections.forEach(({ id }) => {
+      const element = document.getElementById(id);
+      if (element) {
+        observer.observe(element);
+      }
+    });
+
+    return () => {
+      sections.forEach(({ id }) => {
+        const element = document.getElementById(id);
+        if (element) {
+          observer.unobserve(element);
+        }
+      });
+    };
+  }, []);
+
   const handleLinkClick = (linkName: string) => {
     setActiveLink(linkName);
     setIsMobileMenuOpen(false); // Close mobile menu when link is clicked
   };
 
   const getLinkClasses = (linkName: string) => {
-    const baseClasses = "font-medium transition-colors duration-300";
+    const baseClasses = "font-medium transition-colors duration-300 text-base font-sans";
     if (activeLink === linkName) {
       return `${baseClasses} text-gray-800 border-b-2 border-blue-500 pb-1`;
     }
-    return `${baseClasses} text-gray-800 hover:text-blue-600`;
+    return `${baseClasses} text-gray-700 hover:text-blue-600`;
   };
 
   const getMobileLinkClasses = (linkName: string) => {
-    const baseClasses = "block font-medium transition-colors duration-300 py-3 px-4";
+    const baseClasses = "block font-medium transition-colors duration-300 py-3 px-4 text-base font-sans";
     if (activeLink === linkName) {
       return `${baseClasses} text-blue-600 bg-blue-50`;
     }
@@ -37,13 +82,11 @@ export default function Navbar() {
           alt="TransLinka Logo"
           className="h-8 w-8 object-contain"
         />
-        <span className="font-heading font-medium text-gray-800 cursor-pointer select-none text-lg">
-          TransLinka
-        </span>
+        <span className="text-2xl font-bold text-gray-900 font-heading">TransLinka</span>
       </div>
       
       {/* Desktop Navigation */}
-      <div className="space-x-8 hidden md:flex text-sm font-sans">
+      <div className="space-x-8 hidden md:flex text-lg font-sans">
         <a
           href="#hero"
           onClick={() => handleLinkClick('home')}
@@ -85,13 +128,13 @@ export default function Navbar() {
       <div className="space-x-3 hidden md:flex items-center font-sans">
         <Link 
           href="/signin"
-          className="font-medium bg-white border border-gray-300 px-4 py-2 rounded-md text-sm text-gray-800 hover:bg-gray-50 transition-colors"
+          className="font-medium bg-white border border-gray-300 px-4 py-2 rounded-md text-base font-sans text-gray-800 hover:bg-gray-50 transition-colors"
         >
           Sign In
         </Link>
         <Link 
           href="/signup"
-          className="bg-blue-500 text-white px-4 py-2 rounded-md font-medium hover:bg-blue-600 transition-colors text-sm"
+          className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors font-medium text-base font-sans"
         >
           Get started
         </Link>

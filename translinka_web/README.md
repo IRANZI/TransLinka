@@ -2,70 +2,112 @@
 
 **Revolutionizing public transportation with smart technology and user-centric design.**
 
-TransLinka is a comprehensive web application built with Next.js that provides an innovative public transportation platform. The application features real-time bus tracking, AR navigation, seamless ticket booking, seat selection, and a beautiful user interface designed for the future of smart travel.
+TransLinka is a comprehensive, modern web application built with Next.js that provides an innovative public transportation platform. The application features real-time bus tracking, AR navigation, seamless ticket booking, seat selection, and a beautiful, responsive user interface designed for the future of smart travel.
 
-## ✨ Features
+## ✨ Key Features
 
-### 🏠 Landing Page
-- Modern hero section with compelling messaging
-- Feature highlights and benefits
-- Download app section
-- Contact information
-- Responsive design with smooth animations
+### 🏠 Enhanced Landing Page
+- **Modern Hero Section**: Compelling messaging with optimized mobile app preview
+- **Scroll Spy Navigation**: Automatic highlighting based on scroll position
+- **Feature Highlights**: Comprehensive benefits showcase
+- **Download App Section**: Real QR codes for iOS and Android app stores
+- **Contact Information**: Complete contact form and details
+- **Responsive Design**: Smooth animations with Framer Motion
+- **Wider Layout**: Full-width containers for better screen utilization
 
-### 🔐 Authentication
-- **Sign Up**: User registration with form validation
+### 🔐 Authentication System
+- **Sign Up**: User registration with comprehensive form validation
 - **Sign In**: Secure login with automatic dashboard redirect
-- Clean, user-friendly authentication forms
+- **Clean UI**: User-friendly authentication forms with consistent styling
 
-### 📊 Dashboard
-- Personalized welcome message
-- Monthly ticket statistics with trend indicators
-- Quick action buttons for main features
-- Recent activity feed
-- Responsive layout with modern UI components
+### 📊 User Dashboard
+- **Personalized Welcome**: Dynamic user greeting and statistics
+- **Monthly Analytics**: Ticket statistics with trend indicators
+- **Quick Actions**: Fast access to main features (Book, Tickets, AR, Chat)
+- **Recent Activity**: Real-time activity feed
+- **Responsive Layout**: Modern UI components with enhanced typography
+- **Full-Width Design**: Optimized for all screen sizes
 
-###  Ticket Booking Flow
-1. **Search**: Enter departure/destination, date, and passenger count
-2. **Results**: View available buses with pricing and schedules
+### 🎫 Complete Ticket Booking Flow
+1. **Search Interface**: Intuitive departure/destination, date, and passenger selection
+2. **Available Buses**: Comprehensive results with pricing, schedules, and amenities
 3. **Seat Selection**: Interactive bus layout with real-time availability
-4. **Payment**: Secure checkout process (ready for integration)
+4. **Secure Payment**: Multiple payment options (Credit/Debit, Apple Pay, Google Pay, PayPal)
+5. **Booking Confirmation**: Digital tickets with real QR codes for validation
 
-###  My Tickets
-- **Active Tickets**: Current bookings with QR codes
-- **Past Tickets**: Historical travel records with receipts
-- Detailed ticket information including routes, times, and seats
-- Tab-based navigation for easy organization
+### 🎟️ My Tickets Management
+- **Active Tickets**: Current bookings with scannable QR codes
+- **Past Tickets**: Complete historical travel records
+- **Detailed Information**: Routes, times, seats, and pricing
+- **Tab Navigation**: Easy organization between active and past tickets
+- **Download & Share**: Ticket management features
 
-###  AR Navigation
-- Real-time bus tracking and location
-- Route information with ETA and distance
-- Speed monitoring and live updates
-- Pro tips for optimal AR experience
-- Feature showcase for AR capabilities
+### 🔍 AR Navigation
+- **Real-Time Tracking**: Live bus location and route information
+- **ETA & Distance**: Accurate arrival predictions
+- **Speed Monitoring**: Live updates and notifications
+- **AR Experience**: Step-by-step guidance for optimal AR usage
+- **Feature Showcase**: Comprehensive AR capabilities demonstration
+
+### 💬 AI Chat Support
+- **Intelligent Chatbot**: 24/7 automated customer support
+- **Quick Responses**: Pre-defined common questions
+- **Real-Time Chat**: Instant messaging interface
+- **Help Integration**: Seamless support experience
 
 
 
 ## 🛠️ Tech Stack
 
 - **Framework:** [Next.js 14](https://nextjs.org/) with App Router
-- **Language:** TypeScript
-- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
-- **Animations:** [Framer Motion](https://www.framer.com/motion/)
-- **Icons:** [Lucide React](https://lucide.dev/)
-- **Fonts:** Inter & Poppins (Google Fonts)
+- **Language:** TypeScript for type safety and better development experience
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/) with custom configuration
+- **Animations:** [Framer Motion](https://www.framer.com/motion/) for smooth transitions
+- **Icons:** [Lucide React](https://lucide.dev/) for consistent iconography
+- **Fonts:** Inter (body text) & Poppins (headings) from Google Fonts
+- **QR Codes:** QRCode library for real QR code generation
+- **State Management:** React hooks for local state management
 
+## 🎨 UI/UX Enhancements
+
+### Typography System
+- **Standardized Font Sizes**: Consistent typography scale across all components
+- **Responsive Text**: Adaptive font sizes for all screen sizes
+- **Font Hierarchy**: Clear distinction between headings and body text
+- **Accessibility**: Enhanced readability with optimized font sizes
+
+### Layout Improvements
+- **Full-Width Design**: Maximized screen utilization on all devices
+- **Consistent Spacing**: Unified padding and margin system
+- **Responsive Containers**: Adaptive layouts for mobile, tablet, and desktop
+- **Navigation Enhancement**: Wider navbars across all pages for better UX
+
+### Interactive Features
+- **Scroll Spy**: Automatic navigation highlighting based on scroll position
+- **Enhanced QR Codes**: Larger, more scannable QR codes (128px)
+- **Hover Effects**: Smooth transitions and interactive feedback
+- **Mobile Optimization**: Touch-friendly interface elements
+
+### Visual Enhancements
+- **Hero Section**: Optimized mobile preview box with better proportions
+- **Route Details**: Improved visibility with larger status indicators
+- **Color Consistency**: Unified color scheme throughout the application
+- **Professional Polish**: Modern, clean design aesthetic
+
+
+## 🚀 Getting Started
 
 ### Prerequisites
-- Node.js 18.0 or later
-- npm, yarn, pnpm, or bun
+- **Node.js** 18.0 or later
+- **Package Manager**: npm, yarn, pnpm, or bun
+- **Modern Browser**: Chrome, Firefox, Safari, or Edge
 
 ### Installation
 
 1. **Clone the repository**
    ```bash
    git clone <repository-url>
-   cd translinka
+   cd translinka_web
    ```
 
 2. **Install dependencies**
@@ -92,6 +134,85 @@ TransLinka is a comprehensive web application built with Next.js that provides a
 
 4. **Open your browser**
    Navigate to [http://localhost:3000](http://localhost:3000) to see the application.
+
+### Build for Production
+
+```bash
+npm run build
+npm start
+```
+
+## 📱 Application Structure
+
+```
+translinka_web/
+├── app/                    # Next.js App Router pages
+│   ├── dashboard/         # User dashboard
+│   ├── book-ticket/       # Ticket booking interface
+│   ├── search-results/    # Available buses display
+│   ├── select-seats/      # Seat selection interface
+│   ├── payment/           # Payment processing
+│   ├── booking-confirmation/ # Booking success page
+│   ├── my-tickets/        # Ticket management
+│   ├── ar-navigation/     # AR navigation features
+│   ├── chat-support/      # AI chatbot support
+│   ├── signin/            # Authentication
+│   └── signup/            # User registration
+├── components/            # Reusable UI components
+│   ├── Navbar.tsx         # Navigation with scroll spy
+│   ├── Hero.tsx           # Landing page hero section
+│   ├── DownloadAppSection.tsx # App download with QR codes
+│   ├── WhyChooseTransLinka.tsx # Features showcase
+│   ├── HowItWorks.tsx     # Process explanation
+│   ├── ContactPage.tsx    # Contact information
+│   └── FooterAndCTA.tsx   # Footer with support links
+├── public/                # Static assets
+└── tailwind.config.js     # Tailwind CSS configuration
+```
+
+## 🌟 Key Improvements
+
+### Recent Enhancements
+- ✅ **Typography Standardization**: Unified font sizes across all components
+- ✅ **Layout Optimization**: Full-width containers for better screen utilization
+- ✅ **Scroll Spy Navigation**: Automatic highlighting based on scroll position
+- ✅ **Enhanced QR Codes**: Real, larger QR codes for better scanning
+- ✅ **Mobile Optimization**: Improved mobile preview and responsive design
+- ✅ **Consistent Navbar**: Unified width across all application pages
+- ✅ **Support Section**: Fixed footer with proper support links
+- ✅ **Interactive Elements**: Enhanced hover effects and transitions
+
+### Performance Features
+- **Responsive Design**: Optimized for all device sizes
+- **Fast Loading**: Optimized images and efficient code splitting
+- **Smooth Animations**: Hardware-accelerated transitions
+- **Accessibility**: WCAG compliant design principles
+
+## 🔧 Development
+
+### Code Quality
+- **TypeScript**: Full type safety throughout the application
+- **ESLint**: Code linting for consistency
+- **Prettier**: Automated code formatting
+- **Component Architecture**: Modular, reusable components
+
+### Responsive Breakpoints
+- **Mobile**: < 768px
+- **Tablet**: 768px - 1024px
+- **Desktop**: > 1024px
+- **Large Desktop**: > 1280px
+
+## 📄 License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## 📞 Support
+
+For support, email support@translinka.com or join our community chat.
 
 
 

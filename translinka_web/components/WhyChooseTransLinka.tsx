@@ -73,12 +73,12 @@ const features = [
 export default function WhyChooseTransLinka() {
   return (
     <section className="bg-white py-16 px-6 font-sans">
-      <div className="max-w-7xl mx-auto text-center">
+      <div className="max-w-full mx-auto text-center px-6 sm:px-8 lg:px-12">
         {/* Header Section */}
-        <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-800 mb-6">
+        <h2 className="text-4xl md:text-5xl font-heading font-bold text-gray-900 mb-6">
           Why Choose TransLinka
         </h2>
-        <p className="text-gray-600 mb-16 text-lg max-w-3xl mx-auto leading-relaxed">
+        <p className="text-gray-600 mb-16 text-xl max-w-3xl mx-auto leading-relaxed font-sans">
           We're revolutionalizing publci transportation with cutting-edge technology and user-centric design
         </p>
 
@@ -95,12 +95,8 @@ export default function WhyChooseTransLinka() {
               </div>
               
               {/* Content */}
-              <h3 className="text-xl font-heading font-bold text-gray-800 mb-6 flex-grow">
-                {feature.title}
-              </h3>
-              <p className="text-gray-600 text-base leading-relaxed">
-                {feature.description}
-              </p>
+              <h3 className="text-2xl font-heading font-semibold text-gray-900 mb-3">{feature.title}</h3>
+              <p className="text-lg text-gray-600 leading-relaxed font-sans">{feature.description}</p>
             </div>
           ))}
         </div>
