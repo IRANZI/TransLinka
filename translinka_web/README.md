@@ -142,51 +142,8 @@ npm run build
 npm start
 ```
 
-## 📱 Application Structure
 
-```
-translinka_web/
-├── app/                    # Next.js App Router pages
-│   ├── dashboard/         # User dashboard
-│   ├── book-ticket/       # Ticket booking interface
-│   ├── search-results/    # Available buses display
-│   ├── select-seats/      # Seat selection interface
-│   ├── payment/           # Payment processing
-│   ├── booking-confirmation/ # Booking success page
-│   ├── my-tickets/        # Ticket management
-│   ├── ar-navigation/     # AR navigation features
-│   ├── chat-support/      # AI chatbot support
-│   ├── signin/            # Authentication
-│   └── signup/            # User registration
-├── components/            # Reusable UI components
-│   ├── Navbar.tsx         # Navigation with scroll spy
-│   ├── Hero.tsx           # Landing page hero section
-│   ├── DownloadAppSection.tsx # App download with QR codes
-│   ├── WhyChooseTransLinka.tsx # Features showcase
-│   ├── HowItWorks.tsx     # Process explanation
-│   ├── ContactPage.tsx    # Contact information
-│   └── FooterAndCTA.tsx   # Footer with support links
-├── public/                # Static assets
-└── tailwind.config.js     # Tailwind CSS configuration
-```
 
-## 🌟 Key Improvements
-
-### Recent Enhancements
-- ✅ **Typography Standardization**: Unified font sizes across all components
-- ✅ **Layout Optimization**: Full-width containers for better screen utilization
-- ✅ **Scroll Spy Navigation**: Automatic highlighting based on scroll position
-- ✅ **Enhanced QR Codes**: Real, larger QR codes for better scanning
-- ✅ **Mobile Optimization**: Improved mobile preview and responsive design
-- ✅ **Consistent Navbar**: Unified width across all application pages
-- ✅ **Support Section**: Fixed footer with proper support links
-- ✅ **Interactive Elements**: Enhanced hover effects and transitions
-
-### Performance Features
-- **Responsive Design**: Optimized for all device sizes
-- **Fast Loading**: Optimized images and efficient code splitting
-- **Smooth Animations**: Hardware-accelerated transitions
-- **Accessibility**: WCAG compliant design principles
 
 ## 🔧 Development
 
@@ -196,23 +153,9 @@ translinka_web/
 - **Prettier**: Automated code formatting
 - **Component Architecture**: Modular, reusable components
 
-### Responsive Breakpoints
-- **Mobile**: < 768px
-- **Tablet**: 768px - 1024px
-- **Desktop**: > 1024px
-- **Large Desktop**: > 1280px
 
-## 📄 License
 
-This project is licensed under the MIT License - see the LICENSE file for details.
 
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## 📞 Support
-
-For support, email support@translinka.com or join our community chat.
 
 
 
