@@ -2,8 +2,10 @@
 import React, { useState } from 'react';
 import { User, Mail, Phone, Lock, Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function SignupPage() {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -27,6 +29,8 @@ export default function SignupPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
+    // Simulate successful signup and redirect to dashboard
+    router.push('/dashboard');
   };
 
   return (

@@ -2,8 +2,10 @@
 import React, { useState } from 'react';
 import { Mail, Phone, Lock, Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 export default function SignInPage() {
+  const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     email: '',
@@ -23,6 +25,8 @@ export default function SignInPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Sign in submitted:', formData);
+    
+    router.push('/dashboard');
   };
 
   return (

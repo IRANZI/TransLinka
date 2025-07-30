@@ -9,7 +9,7 @@ import HowItWorks from '@/components/HowItWorks';
 import ContactPage from '@/components/ContactPage';
 import FooterAndCTA from '@/components/FooterAndCTA';
 
-// Animation variants
+
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
   visible: { 
