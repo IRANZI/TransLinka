@@ -82,19 +82,19 @@ export default function WhyChooseTransLinka() {
           We're revolutionalizing publci transportation with cutting-edge technology and user-centric design
         </p>
 
-        {/* Feature Cards Grid - 3x2 Layout */}
+        {/* Feature Cards Grid */}
         <div className="grid gap-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {features.map((feature, index) => (
             <div
               key={index}
               className={`p-10 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition duration-300 ${feature.bgColor} min-h-[280px] flex flex-col`}
             >
-              {/* Icon Container */}
+              
               <div className={`w-14 h-14 ${feature.iconBgColor} rounded-lg flex items-center justify-center mb-8 mx-auto`}>
                 {feature.icon}
               </div>
               
-              {/* Content */}
+          
               <h3 className="text-2xl font-heading font-semibold text-gray-900 mb-3">{feature.title}</h3>
               <p className="text-lg text-gray-600 leading-relaxed font-sans">{feature.description}</p>
             </div>

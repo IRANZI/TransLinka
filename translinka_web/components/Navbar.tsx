@@ -29,12 +29,12 @@ export default function Navbar() {
         });
       },
       {
-        threshold: 0.3, // Trigger when 30% of the section is visible
-        rootMargin: '-80px 0px -80px 0px' // Account for navbar height
+        threshold: 0.3, 
+        rootMargin: '-80px 0px -80px 0px' 
       }
     );
 
-    // Observe all sections
+    // Observation
     sections.forEach(({ id }) => {
       const element = document.getElementById(id);
       if (element) {
@@ -54,7 +54,7 @@ export default function Navbar() {
 
   const handleLinkClick = (linkName: string) => {
     setActiveLink(linkName);
-    setIsMobileMenuOpen(false); // Close mobile menu when link is clicked
+    setIsMobileMenuOpen(false); 
   };
 
   const getLinkClasses = (linkName: string) => {

@@ -29,7 +29,7 @@ export default function SignupPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Form submitted:', formData);
-    // Simulate successful signup and redirect to dashboard
+    
     router.push('/dashboard');
   };
 

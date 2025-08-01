@@ -10,7 +10,7 @@ export default function BookingConfirmationPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   
-  // Get booking details from URL parameters
+
   const [bookingDetails, setBookingDetails] = useState({
     from: searchParams.get('from') || 'Remera',
     to: searchParams.get('to') || 'Masaka',
@@ -24,7 +24,7 @@ export default function BookingConfirmationPage() {
   const [qrCodeUrl, setQrCodeUrl] = useState<string>('');
 
   useEffect(() => {
-    // Generate QR code with booking information
+    // Generating QR code 
     const generateQRCode = async () => {
       try {
         const qrData = JSON.stringify({
@@ -114,7 +114,7 @@ export default function BookingConfirmationPage() {
 
       {/* Main Content */}
       <main className="max-w-full mx-auto px-6 sm:px-8 lg:px-12 py-8">
-        {/* Success Header */}
+        
         <div className="bg-green-500 rounded-t-xl p-8 text-center text-white">
           <div className="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4">
             <Check className="w-8 h-8 text-green-500" />
@@ -128,7 +128,7 @@ export default function BookingConfirmationPage() {
           </div>
         </div>
 
-        {/* Boarding Pass */}
+     
         <div className="bg-white border-x border-gray-200 p-6">
           <h2 className="text-lg font-heading font-semibold text-gray-900 mb-4">Your Boarding Pass</h2>
           

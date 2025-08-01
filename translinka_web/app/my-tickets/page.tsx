@@ -158,7 +158,7 @@ export default function MyTicketsPage() {
                   </span>
                 </div>
 
-                {/* Date and Duration */}
+               
                 <div className="flex items-center space-x-4 mb-6">
                   <Calendar className="w-4 h-4 text-gray-400" />
                   <span className="text-sm font-medium text-gray-900 font-sans">{ticket.date}</span>

@@ -22,7 +22,7 @@ import {
 export default function AdminDashboard() {
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Mock admin data
+  // admin data
   const adminData = {
     totalRevenue: '30,000 Rwf',
     revenueChange: '+10.5% from last month',
@@ -130,7 +130,7 @@ export default function AdminDashboard() {
               </Link>
             </li>
             <li>
-              <Link href="/admin/users" className="flex items-center px-4 py-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg font-medium">
+              <Link href="/admin/user-management" className="flex items-center px-4 py-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg font-medium">
                 <Users className="w-5 h-5 mr-3" />
                 Users
               </Link>

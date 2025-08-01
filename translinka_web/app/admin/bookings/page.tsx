@@ -1,5 +1,6 @@
 'use client';
 import React, { useState } from 'react';
+import BookingDetailsModal from './BookingDetailsModal';
 import Link from 'next/link';
 import { 
   Search, 
@@ -24,12 +25,13 @@ import {
 } from 'lucide-react';
 
 export default function BookingManagementPage() {
+  const [showBookingDetails, setShowBookingDetails] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('All Status');
   const [paymentStatusFilter, setPaymentStatusFilter] = useState('All Payments');
   const [dateRangeFilter, setDateRangeFilter] = useState('All Dates');
 
-  // Mock booking data
+  // booking data
   const bookings = [
     {
       id: 'TL-2024-001',
@@ -152,7 +154,7 @@ export default function BookingManagementPage() {
               </Link>
             </li>
             <li>
-              <Link href="/admin/users" className="flex items-center px-4 py-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg font-medium">
+              <Link href="/admin/user-management" className="flex items-center px-4 py-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg font-medium">
                 <Users className="w-5 h-5 mr-3" />
                 Users
               </Link>
@@ -342,10 +344,10 @@ export default function BookingManagementPage() {
                       </div>
                     </div>
                     <div className="flex items-center">
-                      <button className="flex items-center px-4 py-2 text-gray-600 hover:text-blue-600 transition-colors">
-                        <Eye className="w-4 h-4 mr-2" />
-                        View Details
-                      </button>
+                      <button className="flex items-center px-4 py-2 text-gray-600 hover:text-blue-600 transition-colors" onClick={() => setShowBookingDetails(true)}>
+  <Eye className="w-4 h-4 mr-2" />
+  View Details
+</button>
                     </div>
                   </div>
                 </div>
@@ -368,6 +370,7 @@ export default function BookingManagementPage() {
           )}
         </main>
       </div>
+      <BookingDetailsModal open={showBookingDetails} onClose={() => setShowBookingDetails(false)} />
     </div>
   );
 }

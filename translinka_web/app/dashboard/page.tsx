@@ -181,7 +181,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Stats Card */}
-        <div className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl p-6 mb-8 text-white">
+        <div className="bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl p-12 mb-8 text-white">
           <div className="flex justify-between items-start">
             <div>
               <h2 className="text-2xl font-heading font-medium mb-2">This Month</h2>
@@ -203,7 +203,7 @@ export default function DashboardPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Quick Actions */}
           <div className="lg:col-span-2">
-            <h2 className="text-2xl font-heading font-semibold text-gray-900 mb-6">Quick Actions</h2>
+            <h2 className="text-2xl font-heading font-semibold text-gray-900 mb-6 ">Quick Actions</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {quickActions.map((action, index) => (
                 <Link

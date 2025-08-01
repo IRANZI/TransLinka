@@ -76,9 +76,9 @@ export default function BookTicketPage() {
           {/* Left Side - Booking Form */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-xl shadow-sm border p-6 lg:p-8">
-              {/* Form Fields */}
+            
               <div className="space-y-6">
-                {/* From Field */}
+               
                 <div>
                   <label className="block text-base font-medium text-gray-700 mb-3 font-sans">From</label>
                   <div className="relative">
@@ -93,7 +93,7 @@ export default function BookTicketPage() {
                   </div>
                 </div>
 
-                {/* To Field */}
+                
                 <div>
                   <label className="block text-base font-medium text-gray-700 mb-3 font-sans">To</label>
                   <div className="relative">
@@ -108,7 +108,7 @@ export default function BookTicketPage() {
                   </div>
                 </div>
 
-                {/* Departure Date */}
+               
                 <div>
                   <label className="block text-base font-medium text-gray-700 mb-3 font-sans">Departure Date</label>
                   <div className="relative">
@@ -122,7 +122,7 @@ export default function BookTicketPage() {
                   </div>
                 </div>
 
-                {/* Passengers */}
+                
                 <div>
                   <label className="block text-base font-medium text-gray-700 mb-3 font-sans">Passengers</label>
                   <div className="relative">
@@ -148,7 +148,7 @@ export default function BookTicketPage() {
                 </div>
               </div>
 
-              {/* Search Button */}
+             
               <button 
                 onClick={() => {
                   const params = new URLSearchParams({

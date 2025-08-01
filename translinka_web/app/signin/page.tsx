@@ -26,12 +26,12 @@ export default function SignInPage() {
     e.preventDefault();
     console.log('Sign in submitted:', formData);
     
-    // Check if user is admin based on email or role
+    // Checking if user is admin based on email or role
     const isAdmin = formData.email.toLowerCase().includes('admin') || 
                    formData.email.toLowerCase() === 'admin@translinka.com' ||
                    formData.role === 'admin';
     
-    // Redirect based on user type
+    // Login as admin/user
     if (isAdmin) {
       router.push('/admin');
     } else {

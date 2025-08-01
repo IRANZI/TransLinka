@@ -1,6 +1,8 @@
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
+import BusDetailsModal from './BusDetailsModal';
+import EditBusModal from './EditBusModal';
 import { 
   Search, 
   Bell, 
@@ -22,6 +24,9 @@ import {
 } from 'lucide-react';
 
 export default function BusManagementPage() {
+  const [showBusDetails, setShowBusDetails] = useState(false);
+  const [showEditBus, setShowEditBus] = useState(false);
+  const [editingBus, setEditingBus] = useState<any | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('All Status');
   const [showAddBusModal, setShowAddBusModal] = useState(false);
@@ -33,7 +38,7 @@ export default function BusManagementPage() {
     route: 'Masaka → Remera'
   });
 
-  // Mock bus data
+  //bus data
   const buses = [
     {
       id: 1,
@@ -111,7 +116,7 @@ export default function BusManagementPage() {
               </Link>
             </li>
             <li>
-              <Link href="/admin/users" className="flex items-center px-4 py-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg font-medium">
+              <Link href="/admin/user-management" className="flex items-center px-4 py-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg font-medium">
                 <Users className="w-5 h-5 mr-3" />
                 Users
               </Link>
@@ -258,13 +263,18 @@ export default function BusManagementPage() {
 
                 {/* Action Buttons */}
                 <div className="flex items-center justify-between pt-4 border-t">
-                  <button className="flex items-center space-x-1 text-gray-600 hover:text-blue-600 transition-colors">
+                  <button className="flex items-center space-x-1 text-gray-600 hover:text-blue-600 transition-colors" onClick={() => setShowBusDetails(true)}>
                     <Eye className="w-4 h-4" />
-                    <span className="text-sm">View</span>
+                    <span className="text-sm">View Details</span>
                   </button>
-                  <button className="flex items-center space-x-1 text-gray-600 hover:text-blue-600 transition-colors">
+                  <button
+                    className="p-2 border rounded-md text-gray-600 hover:bg-gray-100"
+                    onClick={() => {
+                      setEditingBus(bus);
+                      setShowEditBus(true);
+                    }}
+                  >
                     <Edit className="w-4 h-4" />
-                    <span className="text-sm">Edit</span>
                   </button>
                   <button className="flex items-center space-x-1 text-gray-600 hover:text-red-600 transition-colors">
                     <Trash2 className="w-4 h-4" />
@@ -372,7 +382,7 @@ export default function BusManagementPage() {
               </button>
               <button
                 onClick={() => {
-                  // Here you would typically add the bus to your state/database
+                 
                   console.log('Adding new bus:', newBusData);
                   setShowAddBusModal(false);
                   setNewBusData({ name: '', plateNumber: '', driverName: '', seats: 50, route: 'Masaka → Remera' });
@@ -385,6 +395,15 @@ export default function BusManagementPage() {
           </div>
         </div>
       )}
+      <BusDetailsModal open={showBusDetails} onClose={() => setShowBusDetails(false)} />
+      <EditBusModal
+        open={showEditBus}
+        onClose={() => setShowEditBus(false)}
+        bus={editingBus}
+        onEdit={bus => {
+         
+        }}
+      />
     </div>
   );
 }

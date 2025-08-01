@@ -9,7 +9,7 @@ export default function PaymentPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   
-  // Get booking details from URL parameters
+ 
   const [bookingDetails, setBookingDetails] = useState({
     from: searchParams.get('from') || 'Remera',
     to: searchParams.get('to') || 'Masaka',
@@ -31,10 +31,10 @@ export default function PaymentPage() {
   const serviceFee = 300;
 
   const handlePayment = () => {
-    // Simulate payment processing
+  
     console.log('Processing payment...', { bookingDetails, paymentMethod, cardDetails });
     
-    // Redirect to booking confirmation page with booking details
+   
     const params = new URLSearchParams({
       from: bookingDetails.from,
       to: bookingDetails.to,
@@ -263,7 +263,16 @@ export default function PaymentPage() {
                 </div>
                 <span className="text-sm font-medium text-gray-900 font-sans">PayPal</span>
               </button>
+
+              {/* MoMo Pay */}
+              <button className="w-full flex items-center justify-start p-4 border border-gray-200 rounded-lg hover:border-gray-300 transition-colors">
+                <div className="w-6 h-6 bg-blue-600 rounded flex items-center justify-center mr-3">
+                  <span className="text-white text-xs font-bold">M</span>
+                </div>
+                <span className="text-sm font-medium text-gray-900 font-sans">MoMo Pay</span>
+              </button>
             </div>
+            
           )}
 
           {/* Security Notice */}

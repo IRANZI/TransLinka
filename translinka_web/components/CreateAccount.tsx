@@ -30,7 +30,7 @@ export default function CreateAccount({ isOpen, onClose }: CreateAccountProps) {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission here
+    // Handling form submission 
     console.log('Form submitted:', formData);
   };
 

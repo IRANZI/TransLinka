@@ -6,10 +6,10 @@ export default function DownloadAppSection() {
   const [androidQrCode, setAndroidQrCode] = useState<string>('');
 
   useEffect(() => {
-    // Generate QR codes for app store links
+    // Generating QR codes 
     const generateQRCodes = async () => {
       try {
-        // iOS App Store link (example URL - replace with actual when available)
+        // iOS App Store link
         const iosAppStoreUrl = 'https://apps.apple.com/app/translinka';
         const iosQrCodeDataUrl = await QRCode.toDataURL(iosAppStoreUrl, {
           width: 160,
@@ -21,7 +21,7 @@ export default function DownloadAppSection() {
         });
         setIosQrCode(iosQrCodeDataUrl);
 
-        // Google Play Store link (example URL - replace with actual when available)
+        // Google Play Store link 
         const androidPlayStoreUrl = 'https://play.google.com/store/apps/details?id=com.translinka';
         const androidQrCodeDataUrl = await QRCode.toDataURL(androidPlayStoreUrl, {
           width: 160,
@@ -63,7 +63,7 @@ export default function DownloadAppSection() {
           </p>
         </div>
 
-        {/* Two-Column Layout */}
+        {/* Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 mb-20">
           {/* iOS Column */}
           <div className="flex flex-col">

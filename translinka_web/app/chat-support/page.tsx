@@ -48,7 +48,7 @@ export default function ChatSupportPage() {
     setInputMessage('');
     setIsTyping(true);
 
-    // Simulate AI response
+    // Simulating AI response
     setTimeout(() => {
       const botResponse = generateBotResponse(inputMessage);
       const botMessage: Message = {

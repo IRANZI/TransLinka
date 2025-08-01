@@ -33,11 +33,11 @@ export default function HowItWorks() {
           Getting Started with TransLinka is simple and intuitive
         </p>
 
-        {/* Three Steps */}
+        {/* Steps */}
         <div className="grid gap-12 grid-cols-1 md:grid-cols-3">
           {steps.map((step, index) => (
             <div key={index} className="flex flex-col items-center">
-              {/* Numbered Circle */}
+             
               <div className={`w-32 h-32 ${step.circleColor} rounded-full flex items-center justify-center mb-8 shadow-lg`}>
   <span className="text-white font-bold text-4xl">{step.number}</span>
 </div>

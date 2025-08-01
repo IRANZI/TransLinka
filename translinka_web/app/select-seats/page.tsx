@@ -20,7 +20,7 @@ export default function SelectSeatsPage() {
   
   const [selectedSeats, setSelectedSeats] = useState<string[]>([]);
 
-  // Bus seat layout - 6 rows, 4 seats per row
+  // Bus seat layout 
   const seatLayout = [
     ['1A', '1B', '1C', '1D'],
     ['2A', '2B', '2C', '2D'], 
@@ -37,10 +37,10 @@ export default function SelectSeatsPage() {
     
     setSelectedSeats(prev => {
       if (prev.includes(seatId)) {
-        // Remove seat if already selected
+        // Removing seats that have been selected
         return prev.filter(id => id !== seatId);
       } else {
-        // Add seat only if we haven't reached the passenger limit
+        // Adding seat based passenger limit
         if (prev.length < passengers) {
           return [...prev, seatId];
         }

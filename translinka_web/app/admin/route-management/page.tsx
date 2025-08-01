@@ -1,6 +1,9 @@
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
+import RouteDetailsModal from './RouteDetailsModal';
+import EditRouteModal from './EditRouteModal';
+
 import { 
   Search, 
   Bell, 
@@ -22,6 +25,10 @@ import {
 } from 'lucide-react';
 
 export default function RouteManagementPage() {
+  const [showRouteDetails, setShowRouteDetails] = useState(false);
+  const [showEditRoute, setShowEditRoute] = useState(false);
+  const [editingRoute, setEditingRoute] = useState<any | null>(null);
+
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('All Status');
   const [showAddRouteModal, setShowAddRouteModal] = useState(false);
@@ -33,10 +40,11 @@ export default function RouteManagementPage() {
     duration: '',
     price: '',
     frequency: 'Daily',
-    status: 'Active'
+    status: 'Active',
+    stops: ''
   });
 
-  // Mock route data
+  //route data
   const routes = [
     {
       id: 1,
@@ -130,7 +138,7 @@ export default function RouteManagementPage() {
               </Link>
             </li>
             <li>
-              <Link href="/admin/users" className="flex items-center px-4 py-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg font-medium">
+              <Link href="/admin/user-management" className="flex items-center px-4 py-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg font-medium">
                 <Users className="w-5 h-5 mr-3" />
                 Users
               </Link>
@@ -303,14 +311,25 @@ export default function RouteManagementPage() {
 
                 {/* Action Buttons */}
                 <div className="flex items-center justify-between pt-4 border-t">
-                  <button className="flex items-center space-x-1 text-gray-600 hover:text-blue-600 transition-colors">
-                    <Eye className="w-4 h-4" />
-                    <span className="text-sm">View Details</span>
-                  </button>
-                  <button className="flex items-center space-x-1 text-gray-600 hover:text-blue-600 transition-colors">
-                    <Edit className="w-4 h-4" />
-                    <span className="text-sm">Edit</span>
-                  </button>
+                  <div className="flex gap-48">
+                    <button
+                      className="flex items-center space-x-1 text-gray-600 hover:text-blue-600 transition-colors"
+                      onClick={() => setShowRouteDetails(true)}
+                    >
+                      <Eye className="w-4 h-4" />
+                      <span className="text-sm">View Details</span>
+                    </button>
+                    <button
+                      className="flex items-center space-x-1 text-gray-600 hover:text-blue-600 transition-colors"
+                      onClick={() => {
+                        setEditingRoute(route);
+                        setShowEditRoute(true);
+                      }}
+                    >
+                      <Edit className="w-4 h-4" />
+                      <span className="text-sm">Edit</span>
+                    </button>
+                  </div>
                   <button className="flex items-center space-x-1 text-gray-600 hover:text-red-600 transition-colors">
                     <Trash2 className="w-4 h-4" />
                     <span className="text-sm">Delete</span>
@@ -369,7 +388,7 @@ export default function RouteManagementPage() {
             {/* Modal Body */}
             <div className="p-6">
               <form className="space-y-6">
-                {/* First Row - Route Name and Frequency */}
+               
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Route Name</label>
@@ -396,7 +415,7 @@ export default function RouteManagementPage() {
                   </div>
                 </div>
 
-                {/* Second Row - Origin and Destination */}
+               
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Origin</label>
@@ -420,7 +439,7 @@ export default function RouteManagementPage() {
                   </div>
                 </div>
 
-                {/* Third Row - Distance and Duration */}
+               
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Distance (km)</label>
@@ -444,7 +463,7 @@ export default function RouteManagementPage() {
                   </div>
                 </div>
 
-                {/* Fourth Row - Price and Status */}
+               
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">Price (Rwf)</label>
@@ -457,22 +476,19 @@ export default function RouteManagementPage() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Status</label>
-                    <select
-                      value={newRouteData.status}
-                      onChange={(e) => setNewRouteData(prev => ({ ...prev, status: e.target.value }))}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                    >
-                      <option value="Active">Active</option>
-                      <option value="Inactive">Inactive</option>
-                      <option value="Under Review">Under Review</option>
-                    </select>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Stops (comma or newline separated)</label>
+                    <textarea
+                      placeholder="Kumurindi, Free Zone, KIM University"
+                      value={newRouteData.stops || ''}
+                      onChange={(e) => setNewRouteData(prev => ({ ...prev, stops: e.target.value }))}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent placeholder-gray-500 min-h-[48px]"
+                    />
                   </div>
                 </div>
               </form>
             </div>
 
-            {/* Modal Footer */}
+          
             <div className="p-6 border-t flex space-x-3">
               <button
                 onClick={() => {
@@ -485,7 +501,9 @@ export default function RouteManagementPage() {
                     duration: '',
                     price: '',
                     frequency: 'Daily',
-                    status: 'Active'
+                    status: 'Active',
+                    stops:''
+
                   });
                 }}
                 className="flex-1 px-6 py-3 border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 transition-colors font-medium"
@@ -494,7 +512,7 @@ export default function RouteManagementPage() {
               </button>
               <button
                 onClick={() => {
-                  // Here you would typically add the route to your state/database
+                  
                   console.log('Adding new route:', newRouteData);
                   setShowAddRouteModal(false);
                   setNewRouteData({
@@ -505,7 +523,8 @@ export default function RouteManagementPage() {
                     duration: '',
                     price: '',
                     frequency: 'Daily',
-                    status: 'Active'
+                    status: 'Active',
+                    stops:''
                   });
                 }}
                 className="flex-1 px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors font-medium"
@@ -516,6 +535,16 @@ export default function RouteManagementPage() {
           </div>
         </div>
       )}
+
+      <RouteDetailsModal open={showRouteDetails} onClose={() => setShowRouteDetails(false)} />
+      <EditRouteModal
+        open={showEditRoute}
+        onClose={() => setShowEditRoute(false)}
+        route={editingRoute}
+        onEdit={route => {
+          
+        }}
+      />
     </div>
   );
 }
