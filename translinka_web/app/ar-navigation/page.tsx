@@ -4,6 +4,23 @@ import Link from 'next/link';
 import { Camera, MapPin, Navigation, Clock, Zap, Bell, Target } from 'lucide-react';
 
 export default function ARNavigationPage() {
+  const [showCamera, setShowCamera] = React.useState(false);
+  const [cameraError, setCameraError] = React.useState<string | null>(null);
+  const videoRef = React.useRef<HTMLVideoElement>(null);
+
+  const handleStartCamera = async () => {
+    setCameraError(null);
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream;
+        setShowCamera(true);
+      }
+    } catch (err: any) {
+      setCameraError('Unable to access camera. Please check permissions or try a different device.');
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
       {/* Header */}
@@ -137,8 +154,17 @@ export default function ARNavigationPage() {
           <div className="bg-white rounded-xl shadow-sm border p-8">
             <div className="text-center mb-8">
               <div className="w-20 h-20 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Camera className="w-10 h-10 text-white" />
-              </div>
+  {showCamera ? (
+    <video
+      ref={videoRef}
+      autoPlay
+      playsInline
+      className="rounded-xl w-20 h-20 object-cover border-2 border-blue-400"
+    />
+  ) : (
+    <Camera className="w-10 h-10 text-white" />
+  )}
+</div>
               <h2 className="text-xl font-heading font-semibold text-gray-900 mb-2">AR Navigation</h2>
               <p className="text-gray-600 font-sans">
                 Use augmented reality to find your bus in real-time with live directions and distance tracking.
@@ -177,10 +203,17 @@ export default function ARNavigationPage() {
             </div>
 
             {/* Start Button */}
-            <button className="w-full bg-blue-500 text-white py-4 px-6 rounded-xl hover:bg-blue-600 transition-colors font-medium text-lg font-sans flex items-center justify-center space-x-3">
-              <Camera className="w-5 h-5" />
-              <span>Start AR Navigation</span>
-            </button>
+            <button
+  className="w-full bg-blue-500 text-white py-4 px-6 rounded-xl hover:bg-blue-600 transition-colors font-medium text-lg font-sans flex items-center justify-center space-x-3"
+  onClick={handleStartCamera}
+  disabled={showCamera}
+>
+  <Camera className="w-5 h-5" />
+  <span>{showCamera ? 'Camera Active' : 'Start AR Navigation'}</span>
+</button>
+{cameraError && (
+  <div className="mt-4 text-red-600 text-center text-sm">{cameraError}</div>
+)}
           </div>
         </div>
       </main>

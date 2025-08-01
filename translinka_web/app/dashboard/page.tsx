@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { 
   Ticket, 
   MapPin, 
@@ -7,14 +7,12 @@ import {
   Calendar,
   TrendingUp,
   Clock,
-  CheckCircle,
-  DollarSign,
-  Menu,
   Bell,
-  User,
-  LogOut
+  Menu,
+  DollarSign
 } from 'lucide-react';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface TicketStats {
   thisMonth: number;
@@ -32,6 +30,7 @@ interface RecentActivity {
 }
 
 export default function DashboardPage() {
+  const router = useRouter();
   const [user] = useState({ name: 'John', email: 'john@example.com' });
   const [ticketStats] = useState<TicketStats>({ thisMonth: 12, changeFromLastMonth: 3 });
   const [recentActivities] = useState<RecentActivity[]>([
@@ -163,7 +162,6 @@ export default function DashboardPage() {
                     {user.name.charAt(0)}
                   </span>
                 </div>
-                
               </div>
             </div>
           </div>
@@ -203,24 +201,43 @@ export default function DashboardPage() {
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Quick Actions */}
           <div className="lg:col-span-2">
-            <h2 className="text-2xl font-heading font-semibold text-gray-900 mb-6 ">Quick Actions</h2>
+            <h2 className="text-2xl font-heading font-semibold text-gray-900 mb-6">Quick Actions</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {quickActions.map((action, index) => (
-                <Link
-                  key={index}
-                  href={action.href}
-                  className="bg-white rounded-xl p-6 shadow-sm border hover:shadow-md transition-shadow group"
-                >
-                  <div className="flex items-start space-x-4">
-                    <div className={`${action.color} p-3 rounded-lg group-hover:scale-110 transition-transform`}>
-                      <action.icon className="w-6 h-6 text-white" />
+                action.title === 'AR Navigation' ? (
+                  <button
+                    key={index}
+                    onClick={() => router.push('/ar-navigation')}
+                    className="bg-white rounded-xl p-6 shadow-sm border hover:shadow-md transition-shadow group w-full text-left"
+                    type="button"
+                  >
+                    <div className="flex items-start space-x-4">
+                      <div className={`${action.color} p-3 rounded-lg group-hover:scale-110 transition-transform`}>
+                        <action.icon className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-medium text-lg text-gray-900 font-sans">{action.title}</h3>
+                        <p className="text-base text-gray-600 font-sans">{action.subtitle}</p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="font-medium text-lg text-gray-900 font-sans">{action.title}</h3>
-                      <p className="text-base text-gray-600 font-sans">{action.subtitle}</p>
+                  </button>
+                ) : (
+                  <Link
+                    key={index}
+                    href={action.href}
+                    className="bg-white rounded-xl p-6 shadow-sm border hover:shadow-md transition-shadow group"
+                  >
+                    <div className="flex items-start space-x-4">
+                      <div className={`${action.color} p-3 rounded-lg group-hover:scale-110 transition-transform`}>
+                        <action.icon className="w-6 h-6 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="font-medium text-lg text-gray-900 font-sans">{action.title}</h3>
+                        <p className="text-base text-gray-600 font-sans">{action.subtitle}</p>
+                      </div>
                     </div>
-                  </div>
-                </Link>
+                  </Link>
+                )
               ))}
             </div>
           </div>
@@ -243,9 +260,9 @@ export default function DashboardPage() {
                       </div>
                     </div>
                     <div className="flex-1 min-w-0">
-                      <div className="flex items-center justify-between">
+                      <div className="flex items-center justify-between space-x-2">
                         <span className="text-sm font-medium text-gray-900 font-sans">JD</span>
-                        <p className="text-sm font-medium text-gray-900 font-sans">{activity.title}</p>
+                        <p className="text-sm font-medium text-gray-900 font-sans flex-1">{activity.title}</p>
                         <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(activity.status)}`}>
                           {activity.status.charAt(0).toUpperCase() + activity.status.slice(1)}
                         </span>
