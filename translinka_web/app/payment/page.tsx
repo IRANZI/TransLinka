@@ -29,6 +29,7 @@ export default function PaymentPage() {
 
   const baseFare = 2000;
   const serviceFee = 300;
+  const luggageFee = 0;
 
   const handlePayment = () => {
   
@@ -139,6 +140,10 @@ export default function PaymentPage() {
             <div className="flex justify-between items-center mb-4">
               <span className="text-sm text-gray-600 font-sans">Service Fee</span>
               <span className="text-sm text-gray-900 font-sans">{serviceFee.toLocaleString()} frw</span>
+            </div>
+            <div className="flex justify-between items-center mb-4">
+              <span className="text-sm text-gray-600 font-sans">Luggage Fee</span>
+              <span className="text-sm text-gray-900 font-sans">{luggageFee.toLocaleString()} frw</span>
             </div>
             <div className="border-t pt-3">
               <div className="flex justify-between items-center">
