@@ -32,7 +32,6 @@ export const metadata: Metadata = {
   },
 };
 
-
 export const dynamic = "force-dynamic";
 
 export default function RootLayout({
@@ -42,7 +41,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased text-sm`}>
         {children}
       </body>
     </html>
