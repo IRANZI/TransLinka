@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: "TransLinka",
   description: "Bus Ticket Booking",
   icons: {
-    icon: "/logo.png", 
+    icon: "/logo.png",
   },
   openGraph: {
     title: "TransLinka",
@@ -31,6 +31,9 @@ export const metadata: Metadata = {
     ],
   },
 };
+
+
+export const dynamic = "force-dynamic";
 
 export default function RootLayout({
   children,
