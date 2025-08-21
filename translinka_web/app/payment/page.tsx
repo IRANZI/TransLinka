@@ -3,20 +3,20 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { ArrowLeft, Bell, CreditCard, Smartphone, Shield, Check, Apple } from 'lucide-react';
+import { Bell, CreditCard, Smartphone, Check, Apple } from 'lucide-react';
 
 export default function PaymentPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  
- 
+
+  // Safe default (empty booking details until params load)
   const [bookingDetails, setBookingDetails] = useState({
-    from: searchParams.get('from') || 'Remera',
-    to: searchParams.get('to') || 'Masaka',
-    date: searchParams.get('date') || new Date().toLocaleDateString(),
-    passengers: parseInt(searchParams.get('passengers') || '1'),
-    selectedSeats: searchParams.get('seats')?.split(',') || ['A1'],
-    totalPrice: parseInt(searchParams.get('total') || '2300')
+    from: '',
+    to: '',
+    date: '',
+    passengers: 1,
+    selectedSeats: [] as string[],
+    totalPrice: 0,
   });
 
   const [paymentMethod, setPaymentMethod] = useState('card');
@@ -24,27 +24,37 @@ export default function PaymentPage() {
     number: '',
     expiry: '',
     cvv: '',
-    name: ''
+    name: '',
   });
+
+  // Extract params only on client
+  useEffect(() => {
+    setBookingDetails({
+      from: searchParams.get('from') || 'Remera',
+      to: searchParams.get('to') || 'Masaka',
+      date: searchParams.get('date') || new Date().toLocaleDateString(),
+      passengers: parseInt(searchParams.get('passengers') || '1'),
+      selectedSeats: searchParams.get('seats')?.split(',') || ['A1'],
+      totalPrice: parseInt(searchParams.get('total') || '2300'),
+    });
+  }, [searchParams]);
 
   const baseFare = 2000;
   const serviceFee = 300;
   const luggageFee = 0;
 
   const handlePayment = () => {
-  
     console.log('Processing payment...', { bookingDetails, paymentMethod, cardDetails });
-    
-   
+
     const params = new URLSearchParams({
       from: bookingDetails.from,
       to: bookingDetails.to,
       date: bookingDetails.date,
       passengers: bookingDetails.passengers.toString(),
       seats: bookingDetails.selectedSeats.join(','),
-      total: bookingDetails.totalPrice.toString()
+      total: bookingDetails.totalPrice.toString(),
     });
-    
+
     router.push(`/booking-confirmation?${params.toString()}`);
   };
 
@@ -61,7 +71,9 @@ export default function PaymentPage() {
                 alt="TransLinka Logo"
                 className="h-8 w-8 object-contain mr-3"
               />
-              <span className="text-xl font-heading font-bold text-gray-900">TransLinka</span>
+              <span className="text-xl font-heading font-bold text-gray-900">
+                TransLinka
+              </span>
             </div>
 
             {/* Navigation */}
@@ -112,7 +124,8 @@ export default function PaymentPage() {
                 {bookingDetails.from} → {bookingDetails.to}
               </h3>
               <span className="text-sm font-medium text-blue-600 font-sans">
-                {bookingDetails.selectedSeats.length} Seat{bookingDetails.selectedSeats.length > 1 ? 's' : ''}
+                {bookingDetails.selectedSeats.length} Seat
+                {bookingDetails.selectedSeats.length > 1 ? 's' : ''}
               </span>
             </div>
             <p className="text-sm text-gray-600 font-sans mb-3">City Express</p>
@@ -121,12 +134,12 @@ export default function PaymentPage() {
                 <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded font-sans">
                   {bookingDetails.date}
                 </span>
-                <span className="text-xs text-gray-600 font-sans">
-                  9:00 PM
-                </span>
+                <span className="text-xs text-gray-600 font-sans">9:00 PM</span>
               </div>
               <div className="flex items-center space-x-2">
-                <span className="text-xs text-gray-600 font-sans">Seat {bookingDetails.selectedSeats.join(', ')}</span>
+                <span className="text-xs text-gray-600 font-sans">
+                  Seat {bookingDetails.selectedSeats.join(', ')}
+                </span>
               </div>
             </div>
           </div>
@@ -135,15 +148,21 @@ export default function PaymentPage() {
           <div className="mb-6">
             <div className="flex justify-between items-center mb-2">
               <span className="text-sm text-gray-600 font-sans">Base Fare</span>
-              <span className="text-sm text-gray-900 font-sans">{baseFare.toLocaleString()} frw</span>
+              <span className="text-sm text-gray-900 font-sans">
+                {baseFare.toLocaleString()} frw
+              </span>
             </div>
             <div className="flex justify-between items-center mb-4">
               <span className="text-sm text-gray-600 font-sans">Service Fee</span>
-              <span className="text-sm text-gray-900 font-sans">{serviceFee.toLocaleString()} frw</span>
+              <span className="text-sm text-gray-900 font-sans">
+                {serviceFee.toLocaleString()} frw
+              </span>
             </div>
             <div className="flex justify-between items-center mb-4">
               <span className="text-sm text-gray-600 font-sans">Luggage Fee</span>
-              <span className="text-sm text-gray-900 font-sans">{luggageFee.toLocaleString()} frw</span>
+              <span className="text-sm text-gray-900 font-sans">
+                {luggageFee.toLocaleString()} frw
+              </span>
             </div>
             <div className="border-t pt-3">
               <div className="flex justify-between items-center">
@@ -157,7 +176,9 @@ export default function PaymentPage() {
 
           {/* Payment Method */}
           <div className="mb-6">
-            <h3 className="text-base font-heading font-semibold text-gray-900 mb-4">Payment Method</h3>
+            <h3 className="text-base font-heading font-semibold text-gray-900 mb-4">
+              Payment Method
+            </h3>
             <div className="grid grid-cols-2 gap-3">
               <button
                 onClick={() => setPaymentMethod('card')}
@@ -184,7 +205,7 @@ export default function PaymentPage() {
             </div>
           </div>
 
-          {/* Card Details Form */}
+          {/* Card Form */}
           {paymentMethod === 'card' && (
             <div className="space-y-4 mb-6">
               <div>
@@ -195,11 +216,11 @@ export default function PaymentPage() {
                   type="text"
                   placeholder="1234 5678 9012 3456"
                   value={cardDetails.number}
-                  onChange={(e) => setCardDetails({...cardDetails, number: e.target.value})}
+                  onChange={(e) => setCardDetails({ ...cardDetails, number: e.target.value })}
                   className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent font-sans text-sm"
                 />
               </div>
-              
+
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2 font-sans">
@@ -209,7 +230,7 @@ export default function PaymentPage() {
                     type="text"
                     placeholder="MM/YY"
                     value={cardDetails.expiry}
-                    onChange={(e) => setCardDetails({...cardDetails, expiry: e.target.value})}
+                    onChange={(e) => setCardDetails({ ...cardDetails, expiry: e.target.value })}
                     className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent font-sans text-sm"
                   />
                 </div>
@@ -221,7 +242,7 @@ export default function PaymentPage() {
                     type="text"
                     placeholder="123"
                     value={cardDetails.cvv}
-                    onChange={(e) => setCardDetails({...cardDetails, cvv: e.target.value})}
+                    onChange={(e) => setCardDetails({ ...cardDetails, cvv: e.target.value })}
                     className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent font-sans text-sm"
                   />
                 </div>
@@ -235,17 +256,16 @@ export default function PaymentPage() {
                   type="text"
                   placeholder="John Doe"
                   value={cardDetails.name}
-                  onChange={(e) => setCardDetails({...cardDetails, name: e.target.value})}
+                  onChange={(e) => setCardDetails({ ...cardDetails, name: e.target.value })}
                   className="w-full px-3 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent font-sans text-sm"
                 />
               </div>
             </div>
           )}
 
-          {/* Digital Payment Options */}
+          {/* Digital Payment */}
           {paymentMethod === 'digital' && (
             <div className="space-y-3 mb-6">
-              {/* Apple Pay */}
               <button className="w-full flex items-center justify-start p-4 border border-gray-200 rounded-lg hover:border-gray-300 transition-colors">
                 <div className="w-6 h-6 bg-black rounded flex items-center justify-center mr-3">
                   <Apple className="w-4 h-4 text-white" />
@@ -253,7 +273,6 @@ export default function PaymentPage() {
                 <span className="text-sm font-medium text-gray-900 font-sans">Apple Pay</span>
               </button>
 
-              {/* Google Pay */}
               <button className="w-full flex items-center justify-start p-4 border border-gray-200 rounded-lg hover:border-gray-300 transition-colors">
                 <div className="w-6 h-6 bg-blue-500 rounded flex items-center justify-center mr-3">
                   <span className="text-white text-xs font-bold">G</span>
@@ -261,7 +280,6 @@ export default function PaymentPage() {
                 <span className="text-sm font-medium text-gray-900 font-sans">Google Pay</span>
               </button>
 
-              {/* PayPal */}
               <button className="w-full flex items-center justify-start p-4 border border-gray-200 rounded-lg hover:border-gray-300 transition-colors">
                 <div className="w-6 h-6 bg-blue-600 rounded flex items-center justify-center mr-3">
                   <span className="text-white text-xs font-bold">P</span>
@@ -269,7 +287,6 @@ export default function PaymentPage() {
                 <span className="text-sm font-medium text-gray-900 font-sans">PayPal</span>
               </button>
 
-              {/* MoMo Pay */}
               <button className="w-full flex items-center justify-start p-4 border border-gray-200 rounded-lg hover:border-gray-300 transition-colors">
                 <div className="w-6 h-6 bg-blue-600 rounded flex items-center justify-center mr-3">
                   <span className="text-white text-xs font-bold">M</span>
@@ -277,7 +294,6 @@ export default function PaymentPage() {
                 <span className="text-sm font-medium text-gray-900 font-sans">MoMo Pay</span>
               </button>
             </div>
-            
           )}
 
           {/* Security Notice */}
