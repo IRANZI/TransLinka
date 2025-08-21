@@ -35,7 +35,7 @@ export default function SignupPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex font-sans">
-      {/* Left Side - Information */}
+      {/* Left Side  */}
       <div className="hidden lg:flex lg:w-1/2 bg-white p-16 flex-col justify-start pt-20 relative">
         <div className="max-w-lg">
           <div className="flex items-center mb-8">
@@ -113,7 +113,7 @@ export default function SignupPage() {
         </div>
       </div>
 
-      {/* Right Side - Form */}
+      {/* Right Side */}
       <div className="w-full lg:w-1/2 flex items-center justify-center p-8">
         <div className="w-full max-w-2xl">
           <div className="bg-white rounded-3xl shadow-2xl p-14">
@@ -160,24 +160,7 @@ export default function SignupPage() {
                 </div>
               </div>
 
-              {/* Email Field */}
-              <div>
-                <label className="block text-sm md:text-base font-medium text-gray-700 mb-1">
-                  Email Address
-                </label>
-                <div className="relative">
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    placeholder="john.doe@email.com"
-                    className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm bg-gray-50 transition-all"
-                    required
-                  />
-                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
-                </div>
-              </div>
+              
 
               {/* Phone Field */}
               <div>
