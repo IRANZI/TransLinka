@@ -7,19 +7,21 @@ import { useRouter } from 'next/navigation';
 export default function BookTicketPage() {
   const router = useRouter();
   const [passengers, setPassengers] = useState(1);
+  const [tripType, setTripType] = useState('One Way');
   const [formData, setFormData] = useState({
     from: '',
     to: '',
     date: '2024-12-15',
-    luggage: 'Small Size',
+    returnDate: '2024-12-15',
+    luggage: '1 Kg',
   });
 
   const [luggageDropdownOpen, setLuggageDropdownOpen] = useState(false);
   const luggageOptions = [
-    'No Luggage',
-    'Small Size',
-    'Medium Size',
-    'Large Size',
+    '1 Kg',
+    '5 Kg',
+    '10 Kg',
+    '15 Kg',
   ];
   
   const popularRoutes = [
@@ -85,6 +87,29 @@ export default function BookTicketPage() {
           {/* Left Side - Booking Form */}
           <div className="lg:col-span-2">
             <div className="bg-white rounded-xl shadow-sm border p-6 lg:p-8">
+              {/* Trip Type Toggle */}
+              <div className="flex bg-gray-100 rounded-lg p-1 mb-6">
+                <button
+                  onClick={() => setTripType('One Way')}
+                  className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
+                    tripType === 'One Way'
+                      ? 'bg-white text-gray-900 shadow-sm'
+                      : 'text-gray-600 hover:text-gray-900'
+                  }`}
+                >
+                  One Way
+                </button>
+                <button
+                  onClick={() => setTripType('Round Trip')}
+                  className={`flex-1 py-2 px-4 rounded-md text-sm font-medium transition-colors ${
+                    tripType === 'Round Trip'
+                      ? 'bg-white text-gray-900 shadow-sm'
+                      : 'text-gray-600 hover:text-gray-900'
+                  }`}
+                >
+                  Round Trip
+                </button>
+              </div>
             
               <div className="space-y-6">
                
@@ -118,17 +143,35 @@ export default function BookTicketPage() {
                 </div>
 
                
-                <div>
-                  <label className="block text-base font-medium text-gray-700 mb-3 font-sans">Departure Date</label>
-                  <div className="relative">
-                    <Calendar className="absolute left-4 top-4 w-5 h-5 text-gray-400" />
-                    <input
-                      type="date"
-                      value={formData.date}
-                      onChange={(e) => setFormData({...formData, date: e.target.value})}
-                      className="w-full pl-12 pr-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base font-sans"
-                    />
+                {/* Date Fields */}
+                <div className={`grid ${tripType === 'Round Trip' ? 'grid-cols-2 gap-4' : 'grid-cols-1'}`}>
+                  <div>
+                    <label className="block text-base font-medium text-gray-700 mb-3 font-sans">Departure Date</label>
+                    <div className="relative">
+                      <Calendar className="absolute left-4 top-4 w-5 h-5 text-gray-400" />
+                      <input
+                        type="date"
+                        value={formData.date}
+                        onChange={(e) => setFormData({...formData, date: e.target.value})}
+                        className="w-full pl-12 pr-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base font-sans"
+                      />
+                    </div>
                   </div>
+                  
+                  {tripType === 'Round Trip' && (
+                    <div>
+                      <label className="block text-base font-medium text-gray-700 mb-3 font-sans">Return Date</label>
+                      <div className="relative">
+                        <Calendar className="absolute left-4 top-4 w-5 h-5 text-gray-400" />
+                        <input
+                          type="date"
+                          value={formData.returnDate}
+                          onChange={(e) => setFormData({...formData, returnDate: e.target.value})}
+                          className="w-full pl-12 pr-4 py-4 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base font-sans"
+                        />
+                      </div>
+                    </div>
+                  )}
                 </div>
 
                 
@@ -163,11 +206,11 @@ export default function BookTicketPage() {
                   <div className="relative">
                     <button
                       type="button"
-                      className="w-full flex items-center pl-12 pr-4 py-4 border border-gray-200 rounded-xl bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base font-sans placeholder-gray-400 text-gray-400 hover:border-blue-400 transition"
+                      className="w-full flex items-center pl-12 pr-4 py-4 border border-gray-200 rounded-xl bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent text-base font-sans text-gray-700 hover:border-blue-400 transition"
                       onClick={() => setLuggageDropdownOpen((open) => !open)}
                     >
                       <Briefcase className="absolute left-4 top-4 w-5 h-5 text-gray-400" />
-                      <span className={`text-base font-sans ${formData.luggage === 'No Luggage' ? 'text-gray-400' : 'text-gray-700'}`}>{formData.luggage}</span>
+                      <span className="text-base font-sans text-gray-700">{formData.luggage}</span>
                       <svg className="ml-auto w-5 h-5 text-gray-400" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" /></svg>
                     </button>
                     {luggageDropdownOpen && (
