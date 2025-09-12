@@ -7,7 +7,6 @@ import BusRegistrationModal from './BusRegistrationModal';
 import { 
   Search, 
   Bell, 
-  User, 
   LayoutDashboard, 
   Bus, 
   Route, 
@@ -18,9 +17,6 @@ import {
   Edit,
   Trash2,
   LogOut,
-  Filter,
-  MapPin,
-  Gauge,
   AlertTriangle
 } from 'lucide-react';
 
@@ -379,9 +375,9 @@ export default function BusManagementPage() {
           open={showAddBusModal} 
           onClose={() => setShowAddBusModal(false)} 
           onSubmit={(busData) => {
-            // Handle bus registration submission
+            
             console.log('New bus registered:', busData);
-            // TODO: Add API call to save bus data
+           
             setShowAddBusModal(false);
           }}
         />

@@ -39,7 +39,7 @@ export default function BusRegistrationModal({ open, onClose, onSubmit }: BusReg
     operatingLicense: null as File | null,
     operatingLicenseExpiry: '',
     
-    // Safety Equipment (Required by Rwanda Transport Authority)
+    // Safety Equipment 
     fireExtinguisher: false,
     firstAidKit: false,
     emergencyExits: false,
@@ -125,7 +125,7 @@ export default function BusRegistrationModal({ open, onClose, onSubmit }: BusReg
 
         {/* Form Content */}
         <div className="p-6 overflow-y-auto max-h-[60vh]">
-          {/* Step 1: Basic Vehicle Information */}
+          {/* Basic Vehicle Information */}
           {currentStep === 1 && (
             <div className="space-y-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Basic Vehicle Information</h3>
@@ -227,7 +227,7 @@ export default function BusRegistrationModal({ open, onClose, onSubmit }: BusReg
             </div>
           )}
 
-          {/* Step 2: Registration Documents */}
+          {/* Registration Documents */}
           {currentStep === 2 && (
             <div className="space-y-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Registration Documents</h3>
@@ -323,7 +323,7 @@ export default function BusRegistrationModal({ open, onClose, onSubmit }: BusReg
             </div>
           )}
 
-          {/* Step 3: Driver Information */}
+          {/* Driver Information */}
           {currentStep === 3 && (
             <div className="space-y-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Driver Information</h3>
@@ -368,7 +368,7 @@ export default function BusRegistrationModal({ open, onClose, onSubmit }: BusReg
             </div>
           )}
 
-          {/* Step 4: Safety Equipment */}
+          {/* Safety Equipment */}
           {currentStep === 4 && (
             <div className="space-y-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Safety Equipment (Required by Rwanda Transport Authority)</h3>
@@ -425,7 +425,7 @@ export default function BusRegistrationModal({ open, onClose, onSubmit }: BusReg
             </div>
           )}
 
-          {/* Step 5: Company Information */}
+          {/* Company Information */}
           {currentStep === 5 && (
             <div className="space-y-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4">Company & Contact Information</h3>

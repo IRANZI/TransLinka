@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Ticket, Calendar, Clock, Bell, QrCode, Share2, Download } from 'lucide-react';
+import { Calendar, Clock, Bell, QrCode, Share2, Download } from 'lucide-react';
 
 export default function MyTicketsPage() {
   const [activeTab, setActiveTab] = useState('active');

@@ -1,25 +1,21 @@
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
-import BusAssignmentModal from './route-management/BusAssignmentModal';
+
 import { 
   Search, 
-  Bell, 
-  User, 
+  Bell,  
   LayoutDashboard, 
   Bus, 
   Route, 
   Calendar, 
   Users, 
   TrendingUp, 
-  TrendingDown,
   Plus,
   MapPin,
   Eye,
-  Settings,
   LogOut,
-  ArrowRightLeft,
-  Shield
+  
 } from 'lucide-react';
 
 export default function AdminDashboard() {

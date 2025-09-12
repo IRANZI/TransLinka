@@ -3,12 +3,9 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { 
   Search, 
-  Bell, 
-  User, 
-  LayoutDashboard, 
+  Bell,   
   Building2, 
   TrendingUp, 
-  TrendingDown,
   Eye,
   Trash2,
   AlertTriangle,
@@ -18,7 +15,7 @@ import {
   Shield,
   Users,
   Bus,
-  Calendar
+ 
 } from 'lucide-react';
 
 export default function SuperAdminDashboard() {
@@ -37,7 +34,7 @@ export default function SuperAdminDashboard() {
     totalUsers: '15,847'
   };
 
-  // Sample company data
+  // company data
   const companies = [
     {
       id: 1,
@@ -132,11 +129,11 @@ export default function SuperAdminDashboard() {
   };
 
   const handleRemoveCompanies = () => {
-    // Here you would implement the actual removal logic
+    
     console.log('Removing companies:', selectedCompanies);
     setSelectedCompanies([]);
     setShowRemoveModal(false);
-    // Show success message or refresh data
+    
   };
 
   const filteredCompanies = companies.filter(company =>

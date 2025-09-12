@@ -1,10 +1,8 @@
 "use client";
-
-
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { Check, Download, Share, Bell, Clock, MapPin, Users, Phone, Mail, MessageCircle, Calendar, ArrowRight } from 'lucide-react';
+import { Check, Download, Share, Bell, Users, Phone, Mail } from 'lucide-react';
 import QRCode from 'qrcode';
 
 export default function BookingConfirmationPage() {

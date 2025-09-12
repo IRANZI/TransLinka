@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Bus, User, Phone, Calendar, MapPin, Wrench, FileText } from 'lucide-react';
+import { X, Bus } from 'lucide-react';
 
 interface BusData {
   name: string;

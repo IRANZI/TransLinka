@@ -16,14 +16,14 @@ export default function BookTicketPage() {
     luggage: '1 Kg',
   });
 
-  // 🔹 States for dropdowns
+ 
   const [fromSearch, setFromSearch] = useState('');
   const [toSearch, setToSearch] = useState('');
   const [fromDropdownOpen, setFromDropdownOpen] = useState(false);
   const [toDropdownOpen, setToDropdownOpen] = useState(false);
   const [luggageDropdownOpen, setLuggageDropdownOpen] = useState(false);
 
-  // 🔹 All bus stops in Rwanda
+  // bus stops
   const busStops = [
     'Kigali',
     'Remera',
@@ -41,7 +41,7 @@ export default function BookTicketPage() {
 
   const luggageOptions = ['1 Kg', '5 Kg', '10 Kg', '15 Kg'];
 
-  // 🔹 Popular Routes
+  // Popular Routes
   const popularRoutes = [
     { from: 'Masaka', to: 'Remera', duration: '4h 30m', price: '2,000 Rwf' },
     { from: 'Kigali', to: 'Huye', duration: '2h 10m', price: '3,000 Rwf' },

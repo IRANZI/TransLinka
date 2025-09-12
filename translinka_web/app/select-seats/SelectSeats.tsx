@@ -209,7 +209,7 @@ export default function SelectSeatsPage() {
             
             <button 
               onClick={() => {
-                // Navigate to payment page with selected seats info
+                // Navigation to the payment page with selected seats information
                 const params = new URLSearchParams({
                   seats: selectedSeats.join(','),
                   totalPrice: (selectedSeats.length * parseInt(price.replace(/[^0-9]/g, ''))).toString(),

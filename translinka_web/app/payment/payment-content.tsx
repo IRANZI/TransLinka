@@ -3,13 +3,13 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { Bell, CreditCard, Smartphone, Check, Apple, Wallet, Plus, X } from 'lucide-react';
+import { Bell, CreditCard, Smartphone, Check, Apple, Wallet, X } from 'lucide-react';
 
 export default function PaymentPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  // Safe default (empty booking details until params load)
+  
   const [bookingDetails, setBookingDetails] = useState({
     from: '',
     to: '',
@@ -38,7 +38,7 @@ export default function PaymentPage() {
     name: '',
   });
 
-  // Extract params only on client
+
   useEffect(() => {
     const bookingType = searchParams.get('bookingType') || 'individual';
     setBookingDetails({
@@ -196,7 +196,7 @@ export default function PaymentPage() {
                 </button>
               </div>
 
-              {/* Digital Payment Options */}
+              {/* Digital Payment  */}
               {addMoneyPaymentMethod === 'digital' && (
                 <div className="space-y-2">
                   <button className="w-full flex items-center p-3 border border-gray-200 rounded-lg hover:border-gray-300 transition-colors">

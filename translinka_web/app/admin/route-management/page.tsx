@@ -7,13 +7,11 @@ import BusAssignmentModal from './BusAssignmentModal';
 
 import { 
   Search, 
-  Bell, 
-  User, 
+  Bell,  
   LayoutDashboard, 
   Bus, 
   Route, 
   Calendar, 
-  Users, 
   Plus,
   Eye,
   Edit,
@@ -289,7 +287,7 @@ export default function RouteManagementPage() {
                 <div className="mb-6">
                   <h4 className="text-sm font-medium text-gray-900 mb-2">Stops ({route.stops})</h4>
                   <div className="space-y-2">
-                    {/* Add stops here */}
+                  
                   </div>
                 </div>
 
@@ -527,7 +525,7 @@ export default function RouteManagementPage() {
                     busesAssigned: 0
                   };
 
-                  // Add new route to the list
+                  // Add new route 
                   setRoutes(prev => [...prev, newRoute]);
                   
                   console.log('Adding new route:', newRoute);
@@ -568,7 +566,7 @@ export default function RouteManagementPage() {
         route={selectedRoute}
         onAssign={(routeId: number, busIds: number[]) => {
           console.log('Assigning buses to route:', { routeId, busIds });
-          // Update the route with assigned buses count
+          
           setRoutes(prev => prev.map(route => 
             route.id === routeId 
               ? { ...route, busesAssigned: busIds.length }

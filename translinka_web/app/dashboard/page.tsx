@@ -57,7 +57,7 @@ export default function DashboardPage() {
       subtitle: '$12.50',
       status: 'processed',
       time: 'Today',
-      amount: '$12.50'
+      amount: '12.50 Rwf'
     }
   ]);
 

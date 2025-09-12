@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Bus, User, Phone, Calendar, MapPin, Wrench, Shield, FileText, CheckCircle, XCircle } from 'lucide-react';
+import { X, Bus, User, Phone, Calendar, MapPin, Wrench, FileText, CheckCircle, XCircle } from 'lucide-react';
 
 interface BusDetailsModalProps {
   open: boolean;

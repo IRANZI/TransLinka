@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { Mail, Phone, Lock, Eye, EyeOff } from 'lucide-react';
+import { Mail,  Lock, Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
@@ -33,13 +33,13 @@ export default function SignInPage() {
     e.preventDefault();
     console.log('Sign in submitted:', formData);
     
-    // Validate input format
+    // Input Validation
     if (!isEmail(formData.emailOrPhone) && !isPhone(formData.emailOrPhone)) {
       alert('Please enter a valid email address or phone number');
       return;
     }
     
-    // Checking if user is admin based on email/phone or role
+    // Checking the admin 
     const isAdmin = formData.emailOrPhone.toLowerCase().includes('+1(555)123-4567') || 
                    formData.emailOrPhone.toLowerCase() === '+1(555)123-4567' ||
                    formData.emailOrPhone.toLowerCase() === 'admin@translinka.rw' ||

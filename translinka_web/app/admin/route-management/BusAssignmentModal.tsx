@@ -8,7 +8,7 @@ interface BusAssignmentModalProps {
   onAssign: (routeId: number, busIds: number[]) => void;
 }
 
-// Mock bus data - in real app, this would come from props or API
+// bus data 
 const availableBuses = [
   {
     id: 1,

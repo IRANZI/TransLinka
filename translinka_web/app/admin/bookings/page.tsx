@@ -9,8 +9,7 @@ import {
   LayoutDashboard, 
   Bus, 
   Route, 
-  Calendar, 
-  Users, 
+  Calendar,  
   LogOut,
   Filter,
   Download,
@@ -18,10 +17,6 @@ import {
   Eye,
   MapPin,
   Clock,
-  CheckCircle,
-  AlertCircle,
-  XCircle,
-  Shield
 } from 'lucide-react';
 
 export default function BookingManagementPage() {

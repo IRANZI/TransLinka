@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { 
   Search, 
-  Bell, 
   ArrowLeft,
   Building2, 
   Eye,
@@ -13,12 +12,9 @@ import {
   XCircle,
   LogOut,
   Shield,
-  Users,
-  Bus,
   Plus,
   Filter,
   Download,
-  MoreVertical,
   X
 } from 'lucide-react';
 
@@ -213,7 +209,7 @@ export default function CompaniesManagement() {
     }
   ]);
 
-  // Add company 
+  // Adding a company 
   const [newCompany, setNewCompany] = useState({
     // Basic Company Information
     name: '',
@@ -305,7 +301,7 @@ export default function CompaniesManagement() {
       return;
     }
 
-    // Create new company with admin role
+    // Create new company including the company admin role
     const company = {
       id: Math.max(...companies.map(c => c.id)) + 1,
       name: newCompany.name,
@@ -332,7 +328,7 @@ export default function CompaniesManagement() {
       }
     });
 
-    // Reset form and close modal
+   
     setNewCompany({
       name: '',
       contactPerson: '',
@@ -366,7 +362,7 @@ export default function CompaniesManagement() {
     });
     setShowAddModal(false);
 
-    //success 
+ 
     alert(`Company "${company.name}" has been successfully added! Admin account created for ${newCompany.email}`);
   };
 
@@ -451,9 +447,9 @@ export default function CompaniesManagement() {
           </div>
         </header>
 
-        {/* Page Content */}
+       
         <main className="flex-1 p-6 sm:p-8 lg:p-12">
-          {/* Page Header with Actions */}
+          {/*  Header  */}
           <div className="mb-8">
             <div className="flex justify-between items-start mb-6">
               <div>
@@ -1106,7 +1102,7 @@ export default function CompaniesManagement() {
         </div>
       )}
 
-      {/* Remove Confirmation Modal */}
+      {/* Removeing the Confirmation Modal */}
       {showRemoveModal && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white rounded-lg p-6 max-w-md w-full mx-4">

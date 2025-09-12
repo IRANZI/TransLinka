@@ -1,12 +1,5 @@
-// app/payment/page.tsx
 import { Suspense } from "react";
-import PaymentContent from "./payment-content"
-
-
-
-
-
-;
+import PaymentContent from "./payment-content";
 
 export default function PaymentPage() {
   return (
