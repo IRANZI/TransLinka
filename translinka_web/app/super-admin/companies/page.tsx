@@ -213,7 +213,7 @@ export default function CompaniesManagement() {
     }
   ]);
 
-  // Add company form state
+  // Add company 
   const [newCompany, setNewCompany] = useState({
     // Basic Company Information
     name: '',
@@ -321,13 +321,7 @@ export default function CompaniesManagement() {
       address: newCompany.address
     };
 
-    // Add to companies list
-    setCompanies(prev => [...prev, company]);
 
-    // Here you would typically make an API call to:
-    // 1. Create the company in the database
-    // 2. Create an admin user account for this company
-    // 3. Send welcome email with login credentials
     console.log('Creating new company admin:', {
       company: company,
       adminCredentials: {
@@ -372,7 +366,7 @@ export default function CompaniesManagement() {
     });
     setShowAddModal(false);
 
-    // Show success message
+    //success 
     alert(`Company "${company.name}" has been successfully added! Admin account created for ${newCompany.email}`);
   };
 
