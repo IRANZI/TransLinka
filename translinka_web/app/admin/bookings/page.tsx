@@ -138,13 +138,13 @@ export default function BookingManagementPage() {
             <li>
               <Link href="/admin/bus-management" className="flex items-center px-4 py-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg font-medium">
                 <Bus className="w-5 h-5 mr-3" />
-                Bus Management
+                Bus 
               </Link>
             </li>
             <li>
               <Link href="/admin/route-management" className="flex items-center px-4 py-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg font-medium">
                 <Route className="w-5 h-5 mr-3" />
-                Route Management
+                Route 
               </Link>
             </li>
             <li>
@@ -154,10 +154,7 @@ export default function BookingManagementPage() {
               </Link>
             </li>
             <li>
-              <Link href="/admin/user-management" className="flex items-center px-4 py-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg font-medium">
-                <Users className="w-5 h-5 mr-3" />
-                Users
-              </Link>
+              
             </li>
           </ul>
         </nav>
@@ -177,7 +174,7 @@ export default function BookingManagementPage() {
         <header className="bg-white shadow-sm border-b">
           <div className="max-w-full mx-auto px-6 sm:px-8 lg:px-12">
             <div className="flex justify-between items-center h-16">
-              <h1 className="text-2xl font-heading font-bold text-gray-900">Booking Management</h1>
+              <h1 className="text-2xl font-heading font-bold text-gray-900">Booking</h1>
               
               <div className="flex items-center space-x-4">
                 {/* Search */}
@@ -315,12 +312,7 @@ export default function BookingManagementPage() {
                           }`}>
                             {booking.statusLabels.completed?.text || booking.statusLabels.pending?.text || booking.statusLabels.failed?.text}
                           </span>
-                          {booking.verified && (
-                            <span className="px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800 flex items-center">
-                              <Shield className="w-3 h-3 mr-1" />
-                              verified
-                            </span>
-                          )}
+                          
                         </div>
                       </div>
                       <div className="flex items-center space-x-6 text-sm text-gray-600">

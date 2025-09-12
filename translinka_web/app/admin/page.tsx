@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
+import BusAssignmentModal from './route-management/BusAssignmentModal';
 import { 
   Search, 
   Bell, 
@@ -16,7 +17,9 @@ import {
   MapPin,
   Eye,
   Settings,
-  LogOut
+  LogOut,
+  ArrowRightLeft,
+  Shield
 } from 'lucide-react';
 
 export default function AdminDashboard() {
@@ -114,13 +117,13 @@ export default function AdminDashboard() {
             <li>
               <Link href="/admin/bus-management" className="flex items-center px-4 py-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg font-medium">
                 <Bus className="w-5 h-5 mr-3" />
-                Bus Management
+                Bus 
               </Link>
             </li>
             <li>
               <Link href="/admin/route-management" className="flex items-center px-4 py-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg font-medium">
                 <Route className="w-5 h-5 mr-3" />
-                Route Management
+                Route 
               </Link>
             </li>
             <li>
@@ -130,10 +133,7 @@ export default function AdminDashboard() {
               </Link>
             </li>
             <li>
-              <Link href="/admin/user-management" className="flex items-center px-4 py-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg font-medium">
-                <Users className="w-5 h-5 mr-3" />
-                Users
-              </Link>
+             
             </li>
           </ul>
         </nav>

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import RouteDetailsModal from './RouteDetailsModal';
 import EditRouteModal from './EditRouteModal';
+import BusAssignmentModal from './BusAssignmentModal';
 
 import { 
   Search, 
@@ -28,10 +29,53 @@ export default function RouteManagementPage() {
   const [showRouteDetails, setShowRouteDetails] = useState(false);
   const [showEditRoute, setShowEditRoute] = useState(false);
   const [editingRoute, setEditingRoute] = useState<any | null>(null);
+  const [showBusAssignment, setShowBusAssignment] = useState(false);
+  const [selectedRoute, setSelectedRoute] = useState<any | null>(null);
 
   const [searchQuery, setSearchQuery] = useState('');
   const [statusFilter, setStatusFilter] = useState('All Status');
   const [showAddRouteModal, setShowAddRouteModal] = useState(false);
+  const [routes, setRoutes] = useState([
+    {
+      id: 1,
+      name: 'City Express',
+      origin: 'Masaka',
+      destination: 'Remera',
+      distance: '15 km',
+      duration: '45 min',
+      price: '800 Rwf',
+      frequency: 'Every 30 min',
+      status: 'Active',
+      stops: 5,
+      busesAssigned: 3
+    },
+    {
+      id: 2,
+      name: 'Downtown Shuttle',
+      origin: 'Nyabugogo',
+      destination: 'Kimisagara',
+      distance: '8 km',
+      duration: '25 min',
+      price: '500 Rwf',
+      frequency: 'Every 20 min',
+      status: 'Active',
+      stops: 3,
+      busesAssigned: 2
+    },
+    {
+      id: 3,
+      name: 'Airport Connection',
+      origin: 'Kigali Airport',
+      destination: 'City Center',
+      distance: '12 km',
+      duration: '35 min',
+      price: '1200 Rwf',
+      frequency: 'Every 45 min',
+      status: 'Maintenance',
+      stops: 4,
+      busesAssigned: 1
+    }
+  ]);
   const [newRouteData, setNewRouteData] = useState({
     name: '',
     origin: '',
@@ -43,48 +87,6 @@ export default function RouteManagementPage() {
     status: 'Active',
     stops: ''
   });
-
-  //route data
-  const routes = [
-    {
-      id: 1,
-      name: 'City Express',
-      origin: 'Masaka',
-      destination: 'Remera',
-      distance: '750 km',
-      duration: '12h',
-      price: '12,000 Rwf',
-      activeBuses: 3,
-      frequency: 'Daily',
-      status: 'Active',
-      statusColor: 'bg-green-100 text-green-800',
-      stops: [
-        { name: 'Kumurindi', time: '06:00' },
-        { name: 'Free Zone', time: '08:00' },
-        { name: 'KIM University', time: '13:00' }
-      ],
-      moreStops: 1
-    },
-    {
-      id: 2,
-      name: 'City Express',
-      origin: 'Masaka',
-      destination: 'Remera',
-      distance: '750 km',
-      duration: '12h',
-      price: '12,000 Rwf',
-      activeBuses: 3,
-      frequency: 'Daily',
-      status: 'Active',
-      statusColor: 'bg-green-100 text-green-800',
-      stops: [
-        { name: 'Kumurindi', time: '06:00' },
-        { name: 'Free Zone', time: '08:00' },
-        { name: 'KIM University', time: '13:00' }
-      ],
-      moreStops: 1
-    }
-  ];
 
   const filteredRoutes = routes.filter(route => {
     const matchesSearch = route.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -122,13 +124,13 @@ export default function RouteManagementPage() {
             <li>
               <Link href="/admin/bus-management" className="flex items-center px-4 py-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg font-medium">
                 <Bus className="w-5 h-5 mr-3" />
-                Bus Management
+                Bus
               </Link>
             </li>
             <li>
               <Link href="/admin/route-management" className="flex items-center px-4 py-3 text-blue-600 bg-blue-50 rounded-lg font-medium">
                 <Route className="w-5 h-5 mr-3" />
-                Route Management
+                Route 
               </Link>
             </li>
             <li>
@@ -137,12 +139,7 @@ export default function RouteManagementPage() {
                 Bookings
               </Link>
             </li>
-            <li>
-              <Link href="/admin/user-management" className="flex items-center px-4 py-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-lg font-medium">
-                <Users className="w-5 h-5 mr-3" />
-                Users
-              </Link>
-            </li>
+            
           </ul>
         </nav>
 
@@ -161,7 +158,7 @@ export default function RouteManagementPage() {
         <header className="bg-white shadow-sm border-b">
           <div className="max-w-full mx-auto px-6 sm:px-8 lg:px-12">
             <div className="flex justify-between items-center h-16">
-              <h1 className="text-2xl font-heading font-bold text-gray-900">Route Management</h1>
+              <h1 className="text-2xl font-heading font-bold text-gray-900">Route</h1>
               
               <div className="flex items-center space-x-4">
                 {/* Search */}
@@ -229,7 +226,7 @@ export default function RouteManagementPage() {
                 <option>All Status</option>
                 <option>Active</option>
                 <option>Inactive</option>
-                <option>Under Review</option>
+                
               </select>
             </div>
 
@@ -258,7 +255,7 @@ export default function RouteManagementPage() {
                       <p className="text-sm text-gray-500">{route.origin} → {route.destination}</p>
                     </div>
                   </div>
-                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${route.statusColor}`}>
+                  <span className={`px-2 py-1 rounded-full text-xs font-medium ${route.status === 'Active' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}`}>
                     {route.status}
                   </span>
                 </div>
@@ -279,7 +276,7 @@ export default function RouteManagementPage() {
                   </div>
                   <div className="flex items-center text-sm text-gray-600">
                     <Bus className="w-4 h-4 mr-2" />
-                    <span>{route.activeBuses} active</span>
+                    <span>{route.busesAssigned} active</span>
                   </div>
                 </div>
 
@@ -290,28 +287,15 @@ export default function RouteManagementPage() {
 
                 {/* Stops */}
                 <div className="mb-6">
-                  <h4 className="text-sm font-medium text-gray-900 mb-2">Stops ({route.stops.length + route.moreStops})</h4>
+                  <h4 className="text-sm font-medium text-gray-900 mb-2">Stops ({route.stops})</h4>
                   <div className="space-y-2">
-                    {route.stops.map((stop, index) => (
-                      <div key={index} className="flex items-center justify-between text-sm">
-                        <div className="flex items-center">
-                          <div className="w-2 h-2 bg-blue-500 rounded-full mr-3"></div>
-                          <span className="text-gray-900">{stop.name}</span>
-                        </div>
-                        <span className="text-gray-500">{stop.time}</span>
-                      </div>
-                    ))}
-                    {route.moreStops > 0 && (
-                      <div className="text-sm text-gray-500 ml-5">
-                        +{route.moreStops} more stops
-                      </div>
-                    )}
+                    {/* Add stops here */}
                   </div>
                 </div>
 
                 {/* Action Buttons */}
                 <div className="flex items-center justify-between pt-4 border-t">
-                  <div className="flex gap-48">
+                  <div className="flex gap-4">
                     <button
                       className="flex items-center space-x-1 text-gray-600 hover:text-blue-600 transition-colors"
                       onClick={() => setShowRouteDetails(true)}
@@ -328,6 +312,16 @@ export default function RouteManagementPage() {
                     >
                       <Edit className="w-4 h-4" />
                       <span className="text-sm">Edit</span>
+                    </button>
+                    <button
+                      className="flex items-center space-x-1 text-green-600 hover:text-green-700 transition-colors bg-green-50 hover:bg-green-100 px-3 py-1 rounded-lg"
+                      onClick={() => {
+                        setSelectedRoute(route);
+                        setShowBusAssignment(true);
+                      }}
+                    >
+                      <Bus className="w-4 h-4" />
+                      <span className="text-sm">Assign Buses</span>
                     </button>
                   </div>
                   <button className="flex items-center space-x-1 text-gray-600 hover:text-red-600 transition-colors">
@@ -407,10 +401,10 @@ export default function RouteManagementPage() {
                       onChange={(e) => setNewRouteData(prev => ({ ...prev, frequency: e.target.value }))}
                       className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     >
-                      <option value="Daily">Daily</option>
-                      <option value="Weekly">Weekly</option>
-                      <option value="Bi-weekly">Bi-weekly</option>
-                      <option value="Monthly">Monthly</option>
+                      <option value="Daily">Every 30 min</option>
+                      <option value="Weekly">Each hour</option>
+                      <option value="Bi-weekly">Every 25 hours</option>
+                   
                     </select>
                   </div>
                 </div>
@@ -502,7 +496,7 @@ export default function RouteManagementPage() {
                     price: '',
                     frequency: 'Daily',
                     status: 'Active',
-                    stops:''
+                    stops: ''
 
                   });
                 }}
@@ -512,8 +506,31 @@ export default function RouteManagementPage() {
               </button>
               <button
                 onClick={() => {
+                  // Validate form data
+                  if (!newRouteData.name || !newRouteData.origin || !newRouteData.destination || !newRouteData.price) {
+                    alert('Please fill in all required fields');
+                    return;
+                  }
+
+                  // Create new route with unique ID
+                  const newRoute = {
+                    id: routes.length + 1,
+                    name: newRouteData.name,
+                    origin: newRouteData.origin,
+                    destination: newRouteData.destination,
+                    distance: newRouteData.distance || 'TBD',
+                    duration: newRouteData.duration || 'TBD',
+                    price: newRouteData.price,
+                    frequency: newRouteData.frequency,
+                    status: newRouteData.status,
+                    stops: parseInt(newRouteData.stops) || 0,
+                    busesAssigned: 0
+                  };
+
+                  // Add new route to the list
+                  setRoutes(prev => [...prev, newRoute]);
                   
-                  console.log('Adding new route:', newRouteData);
+                  console.log('Adding new route:', newRoute);
                   setShowAddRouteModal(false);
                   setNewRouteData({
                     name: '',
@@ -524,7 +541,7 @@ export default function RouteManagementPage() {
                     price: '',
                     frequency: 'Daily',
                     status: 'Active',
-                    stops:''
+                    stops: ''
                   });
                 }}
                 className="flex-1 px-6 py-3 bg-blue-600 text-white rounded-xl hover:bg-blue-700 transition-colors font-medium"
@@ -543,6 +560,21 @@ export default function RouteManagementPage() {
         route={editingRoute}
         onEdit={route => {
           
+        }}
+      />
+      <BusAssignmentModal
+        open={showBusAssignment}
+        onClose={() => setShowBusAssignment(false)}
+        route={selectedRoute}
+        onAssign={(routeId: number, busIds: number[]) => {
+          console.log('Assigning buses to route:', { routeId, busIds });
+          // Update the route with assigned buses count
+          setRoutes(prev => prev.map(route => 
+            route.id === routeId 
+              ? { ...route, busesAssigned: busIds.length }
+              : route
+          ));
+          setShowBusAssignment(false);
         }}
       />
     </div>

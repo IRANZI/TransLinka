@@ -35,7 +35,7 @@ export default function BookingDetailsModal({ open, onClose }: BookingDetailsMod
           ×
         </button>
         <h2 className="text-lg font-semibold mb-1">Booking Details – {mockBooking.id}</h2>
-        <div className="text-gray-600 text-sm mb-6">Complete Booking Information including payment and blockchain verification</div>
+        <div className="text-gray-600 text-sm mb-6">Complete Booking Information including payment</div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
           {/* Passenger Information */}
           <div>
@@ -67,16 +67,8 @@ export default function BookingDetailsModal({ open, onClose }: BookingDetailsMod
             <span className="inline-block bg-green-100 text-green-800 px-4 py-1 rounded-full text-sm font-semibold mb-2">{mockBooking.paymentStatus}</span>
           </div>
         </div>
-        {/* Blockchain Verification */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div>
-            <h3 className="font-semibold mb-4">Blockchain Verification:</h3>
-            <div className="mb-2"><span className="font-semibold">Hash:</span> <span className="bg-gray-100 px-2 py-1 rounded text-xs font-mono">{mockBooking.blockchainHash}</span></div>
-          </div>
-          <div className="flex items-end">
-            <span className="inline-block bg-green-100 text-green-800 px-4 py-1 rounded-full text-sm font-semibold">{mockBooking.blockchainStatus}</span>
-          </div>
-        </div>
+       
+        
       </div>
     </div>
   );

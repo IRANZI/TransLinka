@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { Bell, MapPin, Clock, Users, Calendar, ArrowLeft } from 'lucide-react';
+import { Bell, MapPin, Clock, Users, Calendar, ArrowLeft, Bus, CalendarDays } from 'lucide-react';
 import { useSearchParams, useRouter } from 'next/navigation';
 
 export default function SearchResultsPage() {
@@ -13,6 +13,12 @@ export default function SearchResultsPage() {
   const passengers = searchParams.get('passengers') || '1';
 
   const [selectedBus, setSelectedBus] = useState<string | null>(null);
+  const [bookingType, setBookingType] = useState<'individual' | 'charter'>('individual');
+  const [charterPeriod, setCharterPeriod] = useState({
+    startDate: '',
+    endDate: '',
+    duration: 'single-day'
+  });
 
   const availableBuses = [
     {
@@ -23,12 +29,52 @@ export default function SearchResultsPage() {
       arrivalTime: '01:00PM',
       duration: '4h 30m',
       price: '2,000 Rwf',
+      charterPrice: '150,000 Rwf',
       seatsLeft: 12,
+      totalSeats: 45,
       stops: 2,
       from: 'Masaka',
       to: 'Remera'
     }
   ];
+
+  const handleBooking = (bus: any) => {
+    if (bookingType === 'individual') {
+      const params = new URLSearchParams({
+        busId: bus.id,
+        company: bus.company,
+        route: bus.route,
+        from: bus.from,
+        to: bus.to,
+        date: date,
+        departureTime: bus.departureTime,
+        arrivalTime: bus.arrivalTime,
+        duration: bus.duration,
+        price: bus.price,
+        bookingType: 'individual'
+      });
+      router.push(`/select-seats?${params.toString()}`);
+    } else {
+      const params = new URLSearchParams({
+        busId: bus.id,
+        company: bus.company,
+        route: bus.route,
+        from: bus.from,
+        to: bus.to,
+        date: date,
+        departureTime: bus.departureTime,
+        arrivalTime: bus.arrivalTime,
+        duration: bus.duration,
+        price: bus.charterPrice,
+        bookingType: 'charter',
+        startDate: charterPeriod.startDate,
+        endDate: charterPeriod.endDate,
+        charterDuration: charterPeriod.duration,
+        totalSeats: bus.totalSeats.toString()
+      });
+      router.push(`/payment?${params.toString()}`);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50 font-sans">
@@ -68,12 +114,14 @@ export default function SearchResultsPage() {
                 <Bell className="w-5 h-5" />
                 <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
               </button>
+              <Link  href = "/profile">
               <div className="flex items-center space-x-2">
                 <div className="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
                   <span className="text-white text-sm font-medium">J</span>
                 </div>
                
               </div>
+              </Link>
             </div>
           </div>
         </div>
@@ -85,6 +133,110 @@ export default function SearchResultsPage() {
         <div className="mb-8">
           <h1 className="text-2xl font-heading font-bold text-gray-900 mb-2">Available Buses</h1>
           <p className="text-gray-600 font-sans">{from} → {to}</p>
+        </div>
+
+        {/* Booking Type Selection */}
+        <div className="bg-white rounded-xl shadow-sm border p-6 mb-6">
+          <h3 className="text-lg font-heading font-semibold text-gray-900 mb-4">Booking Type</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <button
+              onClick={() => setBookingType('individual')}
+              className={`p-4 border-2 rounded-lg transition-colors text-left ${
+                bookingType === 'individual'
+                  ? 'border-blue-500 bg-blue-50'
+                  : 'border-gray-200 hover:border-gray-300'
+              }`}
+            >
+              <div className="flex items-center mb-2">
+                <Users className="w-5 h-5 mr-2 text-blue-500" />
+                <span className="font-semibold text-gray-900">Individual Seats</span>
+              </div>
+              <p className="text-sm text-gray-600">Book specific seats for passengers</p>
+            </button>
+            
+            <button
+              onClick={() => setBookingType('charter')}
+              className={`p-4 border-2 rounded-lg transition-colors text-left ${
+                bookingType === 'charter'
+                  ? 'border-blue-500 bg-blue-50'
+                  : 'border-gray-200 hover:border-gray-300'
+              }`}
+            >
+              <div className="flex items-center mb-2">
+                <Bus className="w-5 h-5 mr-2 text-blue-500" />
+                <span className="font-semibold text-gray-900">Whole Bus Charter</span>
+              </div>
+              <p className="text-sm text-gray-600">Book entire bus for your group or event</p>
+            </button>
+          </div>
+
+          {/* Charter Period Selection */}
+          {bookingType === 'charter' && (
+            <div className="border-t pt-6">
+              <h4 className="font-semibold text-gray-900 mb-4">Charter Period</h4>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+                <button
+                  onClick={() => setCharterPeriod({...charterPeriod, duration: 'single-day'})}
+                  className={`p-3 border-2 rounded-lg transition-colors ${
+                    charterPeriod.duration === 'single-day'
+                      ? 'border-blue-500 bg-blue-50 text-blue-700'
+                      : 'border-gray-200 hover:border-gray-300'
+                  }`}
+                >
+                  <CalendarDays className="w-4 h-4 mx-auto mb-1" />
+                  <span className="text-sm font-medium">Single Day</span>
+                </button>
+                
+                <button
+                  onClick={() => setCharterPeriod({...charterPeriod, duration: 'multi-day'})}
+                  className={`p-3 border-2 rounded-lg transition-colors ${
+                    charterPeriod.duration === 'multi-day'
+                      ? 'border-blue-500 bg-blue-50 text-blue-700'
+                      : 'border-gray-200 hover:border-gray-300'
+                  }`}
+                >
+                  <Calendar className="w-4 h-4 mx-auto mb-1" />
+                  <span className="text-sm font-medium">Multi-Day</span>
+                </button>
+                
+                <button
+                  onClick={() => setCharterPeriod({...charterPeriod, duration: 'weekly'})}
+                  className={`p-3 border-2 rounded-lg transition-colors ${
+                    charterPeriod.duration === 'weekly'
+                      ? 'border-blue-500 bg-blue-50 text-blue-700'
+                      : 'border-gray-200 hover:border-gray-300'
+                  }`}
+                >
+                  <Calendar className="w-4 h-4 mx-auto mb-1" />
+                  <span className="text-sm font-medium">Weekly</span>
+                </button>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Start Date</label>
+                  <input
+                    type="date"
+                    value={charterPeriod.startDate}
+                    onChange={(e) => setCharterPeriod({...charterPeriod, startDate: e.target.value})}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  />
+                </div>
+                
+                {charterPeriod.duration !== 'single-day' && (
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">End Date</label>
+                    <input
+                      type="date"
+                      value={charterPeriod.endDate}
+                      onChange={(e) => setCharterPeriod({...charterPeriod, endDate: e.target.value})}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                    />
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Search Summary */}
@@ -133,8 +285,12 @@ export default function SearchResultsPage() {
                   <p className="text-sm text-gray-600 font-sans">{bus.route}</p>
                 </div>
                 <div className="text-right">
-                  <div className="text-lg font-bold text-blue-600 font-sans">{bus.price}</div>
-                  <div className="text-sm text-gray-500 font-sans">per person</div>
+                  <div className="text-lg font-bold text-blue-600 font-sans">
+                    {bookingType === 'individual' ? bus.price : bus.charterPrice}
+                  </div>
+                  <div className="text-sm text-gray-500 font-sans">
+                    {bookingType === 'individual' ? 'per person' : 'whole bus'}
+                  </div>
                 </div>
               </div>
 
@@ -166,28 +322,23 @@ export default function SearchResultsPage() {
               {/* Additional Info */}
               <div className="flex justify-between items-center">
                 <div className="flex items-center space-x-4 text-sm text-gray-600 font-sans">
-                  <span>{bus.seatsLeft} seats left</span>
-                  <span>{bus.stops} stops</span>
+                  {bookingType === 'individual' ? (
+                    <>
+                      <span>{bus.seatsLeft} seats left</span>
+                      <span>{bus.stops} stops</span>
+                    </>
+                  ) : (
+                    <>
+                      <span>{bus.totalSeats} total seats</span>
+                      <span>Full bus charter</span>
+                    </>
+                  )}
                 </div>
                 <button 
-                  onClick={() => {
-                    const params = new URLSearchParams({
-                      busId: bus.id,
-                      company: bus.company,
-                      route: bus.route,
-                      from: bus.from,
-                      to: bus.to,
-                      date: date,
-                      departureTime: bus.departureTime,
-                      arrivalTime: bus.arrivalTime,
-                      duration: bus.duration,
-                      price: bus.price
-                    });
-                    router.push(`/select-seats?${params.toString()}`);
-                  }}
+                  onClick={() => handleBooking(bus)}
                   className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors font-medium font-sans"
                 >
-                  Select Seat
+                  {bookingType === 'individual' ? 'Select Seat' : 'Charter Bus'}
                 </button>
               </div>
             </div>

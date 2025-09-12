@@ -8,8 +8,7 @@ export default function SignInPage() {
   const router = useRouter();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    email: '',
-    phone: '',
+    emailOrPhone: '',
     password: '',
     role: 'user'
   });
@@ -22,13 +21,28 @@ export default function SignInPage() {
     }));
   };
 
+  const isEmail = (input: string) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(input);
+  };
+
+  const isPhone = (input: string) => {
+    return /^[\+]?[1-9][\d]{0,15}$/.test(input.replace(/[\s\-\(\)]/g, ''));
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     console.log('Sign in submitted:', formData);
     
-    // Checking if user is admin based on email or role
-    const isAdmin = formData.phone.toLowerCase().includes('+1(555)123-4567') || 
-                   formData.phone.toLowerCase() === '+1(555)123-4567' ||
+    // Validate input format
+    if (!isEmail(formData.emailOrPhone) && !isPhone(formData.emailOrPhone)) {
+      alert('Please enter a valid email address or phone number');
+      return;
+    }
+    
+    // Checking if user is admin based on email/phone or role
+    const isAdmin = formData.emailOrPhone.toLowerCase().includes('+1(555)123-4567') || 
+                   formData.emailOrPhone.toLowerCase() === '+1(555)123-4567' ||
+                   formData.emailOrPhone.toLowerCase() === 'admin@translinka.rw' ||
                    formData.role === 'admin';
     
     // Login as admin/user
@@ -184,22 +198,22 @@ export default function SignInPage() {
               </div>
              
 
-              {/* Phone Field */}
+              {/* Email/Phone Field */}
               <div>
                 <label className="block text-sm md:text-base font-medium text-gray-700 mb-4">
-                  Phone Number
+                  Email or Phone Number
                 </label>
                 <div className="relative">
                   <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
+                    type="text"
+                    name="emailOrPhone"
+                    value={formData.emailOrPhone}
                     onChange={handleInputChange}
-                    placeholder="+1(555)123-4567"
+                    placeholder="Enter your email or phone number"
                     className="w-full pl-10 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm bg-gray-50 transition-all"
                     required
                   />
-                  <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                  <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
                 </div>
               </div>
 
