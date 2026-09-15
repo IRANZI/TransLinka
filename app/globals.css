@@ -1,0 +1,222 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-afacad: "Afacad", sans-serif;
+  --max-content-width: 1680px;
+  --navy-950: #06101c;
+  --navy-900: #0a1c30;
+  --navy-800: #0f2a45;
+  --navy-700: #163a5c;
+  --navy-600: #1e4d73;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-afacad), sans-serif;
+  font-size: clamp(0.9375rem, 0.86rem + 0.4vw, 1.0625rem);
+  line-height: 1.6;
+  color: #0a1c30;
+  background: #ffffff;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a,
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+::selection {
+  background: rgba(30, 77, 115, 0.18);
+  color: #0a1c30;
+}
+
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin: 0;
+    color: inherit;
+    font-family: var(--font-afacad), sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.12;
+  }
+
+  p {
+    margin: 0;
+  }
+}
+
+@layer components {
+  .page-wrap {
+    @apply mx-auto w-full max-w-content px-3 sm:px-4 lg:px-5 xl:px-6;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl bg-navy-700 px-5 py-3 text-sm font-semibold text-white shadow-soft transition-all duration-200 hover:bg-navy-800 hover:shadow-lift sm:px-6 sm:text-base;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl border border-navy-200 bg-white px-5 py-3 text-sm font-semibold text-navy-800 transition-all duration-200 hover:bg-navy-50 sm:px-6 sm:text-base;
+  }
+
+  .input-field {
+    @apply w-full rounded-xl border border-navy-100 bg-navy-50/60 py-3 pl-11 pr-4 text-sm text-navy-900 outline-none transition-all placeholder:text-navy-400 focus:border-navy-500 focus:bg-white focus:ring-2 focus:ring-navy-500/20 sm:text-base;
+  }
+}
+
+@layer utilities {
+  .text-display {
+    font-size: clamp(2.125rem, 1.4rem + 3.4vw, 4.25rem);
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+  }
+
+  .text-section {
+    font-size: clamp(1.75rem, 1.2rem + 2.2vw, 3rem);
+    line-height: 1.12;
+    letter-spacing: -0.03em;
+    font-weight: 700;
+  }
+
+  .text-subhead {
+    font-size: clamp(1.2rem, 1rem + 1vw, 1.75rem);
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+  }
+
+  .text-body-lg {
+    font-size: clamp(1rem, 0.92rem + 0.45vw, 1.2rem);
+    line-height: 1.65;
+    font-weight: 400;
+  }
+
+  .text-body {
+    font-size: clamp(0.9375rem, 0.86rem + 0.35vw, 1.0625rem);
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  .text-label {
+    font-size: clamp(0.7rem, 0.66rem + 0.18vw, 0.78rem);
+    line-height: 1.25;
+    letter-spacing: 0.04em;
+    font-weight: 600;
+    text-transform: uppercase;
+  }
+}
+
+/* 3D bus scene */
+.bus-scene {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  perspective: 1400px;
+}
+
+.bus-scene__image {
+  position: absolute;
+  inset: 0;
+  width: 120%;
+  height: 120%;
+  object-fit: cover;
+  object-position: 68% 55%;
+  animation: scene-pan 28s ease-in-out infinite alternate;
+  transform: scale(1.08);
+  filter: saturate(1.05) contrast(1.04);
+}
+
+.bus-scene__vignette {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(6, 16, 28, 0.88) 0%, rgba(6, 16, 28, 0.62) 38%, rgba(6, 16, 28, 0.18) 68%, rgba(6, 16, 28, 0.45) 100%),
+    linear-gradient(180deg, rgba(6, 16, 28, 0.35) 0%, transparent 30%, rgba(6, 16, 28, 0.55) 100%);
+}
+
+.bus-scene__glow {
+  position: absolute;
+  width: 46vw;
+  height: 46vw;
+  right: 4%;
+  top: 18%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(107, 145, 181, 0.28) 0%, rgba(30, 77, 115, 0.08) 42%, transparent 70%);
+  animation: glow-pulse 6s ease-in-out infinite;
+}
+
+@keyframes scene-pan {
+  from {
+    transform: scale(1.08) translate3d(0, 0, 0);
+  }
+  to {
+    transform: scale(1.14) translate3d(-4%, -2%, 0);
+  }
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    opacity: 0.65;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.08);
+  }
+}
+
+@media (max-width: 1024px) {
+  .bus-scene__image {
+    object-position: 78% 50%;
+  }
+}
+
+.linka-sidebar {
+  animation: linka-slide 220ms ease-out;
+}
+
+@keyframes linka-slide {
+  from {
+    transform: translateX(28px);
+    opacity: 0.65;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bus-scene__image,
+  .bus-scene__glow,
+  .linka-sidebar {
+    animation: none !important;
+  }
+}
