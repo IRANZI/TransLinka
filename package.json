@@ -4,17 +4,17 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate --schema backend/prisma/schema.prisma && next build",
     "start": "next start",
     "lint": "next lint",
     "db:generate": "prisma generate --schema backend/prisma/schema.prisma",
     "db:push": "prisma db push --schema backend/prisma/schema.prisma",
     "db:seed": "tsx backend/prisma/seed.ts",
-    "db:setup": "prisma generate --schema backend/prisma/schema.prisma && prisma db push --schema backend/prisma/schema.prisma && tsx backend/prisma/seed.ts"
-   
+    "db:setup": "prisma generate --schema backend/prisma/schema.prisma && prisma db push --schema backend/prisma/schema.prisma && tsx backend/prisma/seed.ts",
+    "postinstall": "prisma generate --schema backend/prisma/schema.prisma"
   },
   "engines": {
-    "node": ">=20"
+    "node": "20.x"
   },
   "dependencies": {
     "@prisma/client": "^6.19.3",
