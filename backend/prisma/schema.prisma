@@ -1,0 +1,216 @@
+generator client {
+  provider      = "prisma-client-js"
+  output        = "../generated/prisma"
+  binaryTargets = ["native", "debian-openssl-3.0.x", "rhel-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  TRAVELER
+  COMPANY_ADMIN
+  SUPER_ADMIN
+}
+
+enum CompanyStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum BusStatus {
+  ACTIVE
+  MAINTENANCE
+  INACTIVE
+}
+
+enum RouteStatus {
+  ACTIVE
+  INACTIVE
+  MAINTENANCE
+}
+
+enum BookingStatus {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+enum PaymentStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
+
+enum PaymentMethod {
+  MOMO
+  CARD
+  WALLET
+  DIGITAL
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  phone         String?   @unique
+  passwordHash  String
+  firstName     String
+  lastName      String
+  role          Role      @default(TRAVELER)
+  companyId     String?
+  company       Company?  @relation(fields: [companyId], references: [id], onDelete: SetNull)
+  walletBalance Int       @default(25000)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  bookings      Booking[]
+  payments      Payment[]
+}
+
+model Company {
+  id                           String         @id @default(cuid())
+  name                         String
+  status                       CompanyStatus  @default(ACTIVE)
+  contactPerson                String
+  phone                        String
+  email                        String
+  address                      String?
+  businessRegistrationNumber   String?
+  tinNumber                    String?
+  vatRegistrationNumber        String?
+  transportLicenseNumber       String?
+  ruraLicenseNumber            String?
+  rtdaPermitNumber             String?
+  companyType                  String?
+  operatingRoutes              String?
+  fleetSize                    Int            @default(0)
+  bankAccountDetails           String?
+  authorizedCapital            String?
+  paidUpCapital                String?
+  directorName                 String?
+  directorNationalId           String?
+  directorAddress              String?
+  directorPhone                String?
+  documents                    Json?
+  createdAt                    DateTime       @default(now())
+  updatedAt                    DateTime       @updatedAt
+  users                        User[]
+  buses                        Bus[]
+  routes                       Route[]
+  bookings                     Booking[]
+}
+
+model Bus {
+  id              String     @id @default(cuid())
+  companyId       String
+  company         Company    @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  name            String
+  plateNumber     String     @unique
+  chassisNumber   String?
+  engineNumber    String?
+  make            String?
+  model           String?
+  year            Int?
+  color           String?
+  seats           Int        @default(50)
+  mileage         String?
+  driverName      String?
+  driverLicense   String?
+  driverNationalId String?
+  status          BusStatus  @default(ACTIVE)
+  assignedRouteId String?
+  assignedRoute   Route?     @relation(fields: [assignedRouteId], references: [id], onDelete: SetNull)
+  lastMaintenance DateTime?
+  nextMaintenance DateTime?
+  documents       Json?
+  safetyEquipment Json?
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+  bookings        Booking[]
+}
+
+model Route {
+  id          String      @id @default(cuid())
+  companyId   String
+  company     Company     @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  name        String
+  origin      String
+  destination String
+  distanceKm  String?
+  duration    String?
+  price       Int
+  frequency   String?
+  status      RouteStatus @default(ACTIVE)
+  stops       String?
+  departureTime String    @default("08:30")
+  arrivalTime   String    @default("13:00")
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  buses       Bus[]
+  bookings    Booking[]
+}
+
+model Booking {
+  id             String         @id @default(cuid())
+  reference      String         @unique
+  userId         String
+  user           User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  companyId      String
+  company        Company        @relation(fields: [companyId], references: [id])
+  routeId        String
+  route          Route          @relation(fields: [routeId], references: [id])
+  busId          String?
+  bus            Bus?           @relation(fields: [busId], references: [id])
+  origin         String
+  destination    String
+  travelDate     DateTime
+  departureTime  String
+  arrivalTime    String
+  seats          String[]
+  passengers     Int            @default(1)
+  amount         Int
+  bookingType    String         @default("individual")
+  status         BookingStatus  @default(PENDING)
+  gate           String         @default("Gate 3")
+  createdAt      DateTime       @default(now())
+  updatedAt      DateTime       @updatedAt
+  payment        Payment?
+}
+
+model Payment {
+  id           String         @id @default(cuid())
+  bookingId    String         @unique
+  booking      Booking        @relation(fields: [bookingId], references: [id], onDelete: Cascade)
+  userId       String
+  user         User           @relation(fields: [userId], references: [id])
+  method       PaymentMethod
+  provider     String?
+  amount       Int
+  status       PaymentStatus  @default(PENDING)
+  transactionId String        @unique
+  metadata     Json?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  firstName String
+  lastName  String
+  email     String
+  subject   String
+  message   String
+  createdAt DateTime @default(now())
+}
+
+model EmailLog {
+  id         String   @id @default(cuid())
+  to         String
+  subject    String
+  body       String
+  status     String
+  previewUrl String?
+  createdAt  DateTime @default(now())
+}
